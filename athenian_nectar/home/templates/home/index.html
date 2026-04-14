@@ -1,33 +1,9 @@
-<!DOCTYPE html>
+{% extends 'home/base.html' %}
+{% load static %}
+{% block content %}
 
-<html lang="en">  
-
-    <head>
-        <title> Athenian Nectar</title> 
-        <meta charset="UTF-8"> <!-- ensures text, symbols and emojis desplay correctly-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A food and drinks guide blog for Athens, Greece">
-        <meta name="author" content="Nikoletta Dimitriadi">
-        <link rel="icon" href="./images/tabicon.png">
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/index.css' %}">
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-        <script src="{% static 'js/script.js' %}"></script>
-        <script src="{% static 'js/index.js' %}"></script>
-   </head>
-
-    <body>
-
-        <!-- HEADER -->
-        <div id="header-placeholder"></div>
-
-        <main>
-        
-            <!--WELCOME SECTION-->
-            <img src="./images/welcome.jpeg" 
+<!--WELCOME SECTION-->
+            <img src="{% static 'images/welcome.jpeg' %}"
             alt="Top-down view of a fresh vegetable salad in a bowl, surrounded by scattered salad ingredients and the word ‘Welcome’ in large orange letters." 
             class="welcome-image"> 
 
@@ -41,10 +17,7 @@
                 <p> <b>Join Us in Raising a Glass:</b> As we navigate the labyrinth of tastes that Athens offers, join us in raising a glass to the diverse and ever-evolving culinary landscape. Athenian Nectar is not just a blog; it’s a celebration of the art, culture, and joy found in every bite and sip in this remarkable city.</p>
                 <p> Cheers to a gastronomic adventure that goes beyond the expected, guided by Athenian Nectar – where every post is a passport to Athens’ culinary wonders!</p>
             
-                <!-- call to action button-->
-                <div class="call_to_action-container">
-                    <a href="tasks.html" class="orange-button">View My Favorites</a>
-                </div>
+                
             </div>
 
 
@@ -195,13 +168,6 @@
             </button>
 
             <dark-mode-toggle></dark-mode-toggle> 
-        </main>
 
-        <!-- FOOTER-->
-        <div id="footer-placeholder"></div>
 
-        
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    </body>
-</html>
+{% endblock %}

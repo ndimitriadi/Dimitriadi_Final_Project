@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">  
+
+    <head>
+        <title> Athenian Nectar</title> 
+        <meta charset="UTF-8"> <!-- ensures text, symbols and emojis desplay correctly-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A food and drinks guide blog for Athens, Greece">
+        <meta name="author" content="Nikoletta Dimitriadi">
+        <link rel="icon" href="{% static 'images/tabicon.png' %}">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+        <script src="{% static 'js/script.js' %}" defer></script>
+        <script src="{% static 'js/index.js' %}" defer></script>
+   </head>
+
+    <body>
+
+        <!-- HEADER -->
+        {% include 'home/header.html' %}
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <!-- FOOTER-->
+       {% include 'home/footer.html' %}
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+</html>

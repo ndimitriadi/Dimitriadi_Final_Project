@@ -1,0 +1,47 @@
+{% load static %}
+<hr class="footer-line">
+
+<footer class="footer">
+
+    <!-- Left column -->
+    <div class="footer-col footer-left">
+        <img src= "{% static 'images/logo.png' %}" class="footer-logo" alt="Athenian Nectar Logo">
+
+        <a href="mailto:atheniannectar@gmail.com" class="footer-email" aria-label="Email us at atheniannectar@gmail.com">
+            atheniannectar@gmail.com
+        </a>
+
+        <div class="footer-social">
+            <a href="#" aria-label="Visit our Instagram"><img src= "{% static 'images/instagram.png' %}" alt="Instagram Icon"></a>
+            <a href="#" aria-label="Visit our Twitter"><img src= "{% static 'images/twitter.png' %}" alt="Twitter Icon"></a>
+            <a href="#" aria-label="Visit our Facebook"><img src= "{% static 'images/facebook.png' %}" alt="Facebook Icon"></a>
+        </div>
+
+        <div class="footer-terms">
+            <p>&#169; 2026 Athenian Nectar</p>
+            <a href="#"><span>Privacy Policy</span></a> <br>
+            <a href="#"><span>Terms of service</span></a>
+        </div>
+    </div>
+
+    <!-- Middle column -->
+    <div class="footer-col footer-links" aria-label="Footer navigation">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="./discover.html">Discover</a>
+        <a href="./tasks.html">Favorites</a>
+        <a href="./about_us.html">About</a>
+        <a href="./contact_us.html">Contact</a>
+    </div>
+
+    <!-- Right column -->
+    <div class="newsletter" aria-labelledby="newsletter-title">
+        <p id="newsletter-title"> Subscribe to our newsletter </p>
+
+        <form>
+            <label for="footer-email" style="display:none;">Email Address</label>
+            <input id="footer-email" class="row form-area" placeholder="Your email" type="email" name="email" maxlength="40" required>
+            <button type="submit" class="newsletter-button"> Submit </button>
+        </form>
+
+    </div>
+</footer>

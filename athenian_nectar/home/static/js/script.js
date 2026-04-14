@@ -1,19 +1,3 @@
-//--------------------- LOADING HEADER ----------------------------------
-const header_placeholder = document.querySelector('#header-placeholder');
-
-fetch('header.html')
-.then(response => {
-    return response.text();
-})
-
-.then(data => {
-    header_placeholder.innerHTML = data;
-
-    highlight_active_link();
-    hamburger_menu();
-    });
-        
-
 //-------------- HIGHLIGHT ACTIVE LINK --------------------------------------
 function highlight_active_link(){
     const current_window_location = window.location.href; 
@@ -49,21 +33,6 @@ function hamburger_menu(){
         })
 }
             
-
-//----------- LOADING FOOTER----------------------------------------------------
-
-//we send a request for footer.html and we get an object 'response'. In order to be a able to read it we 'response.text()'
-//then we data contains the actual HTML string
-const footer_placeholder = document.querySelector('#footer-placeholder');
-
-fetch('footer.html')
-    .then(response => {
-        return response.text();
-    })
-    .then(data => {
-        footer_placeholder.innerHTML = data;
-    })
-
 
 /*-------------- DARK MODE -------------------------------------*/
 
@@ -116,6 +85,10 @@ customElements.define('dark-mode-toggle', dark_mode);
 
 /*--------------- BACK TO TOP BUTTON-----------------------------*/
 document.addEventListener('DOMContentLoaded', () => {
+
+    highlight_active_link();
+    hamburger_menu();
+
     const back_to_top = document.querySelector('#back-to-top');
     if (back_to_top) {
         window.addEventListener('scroll', () => {
