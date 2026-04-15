@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %}
 {% load static %}
 
-{% block title %}About Us{% endblock %}
+{% block title %}Contact Us{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/contact_us.css' %}">
@@ -60,16 +60,17 @@
                     You can reach us anytime
                 </p>
 
-                <form id="contactForm">
+                <form id="contactForm" method="POST">
+                    {% csrf_token %}
+
                     <div class="row">
-                        <input class="form-area" placeholder="First name" type="text" name="first_name" maxlength="25" aria-label="First name" required>
-                        <input class="form-area" placeholder="Last name" type="text" name="last_name" maxlength="25" aria-label="Last name" required>
+                        {{ form.first_name }}
+                        {{ form.last_name }}
                     </div>
 
-                    <input class="row form-area" placeholder="Your email" type="email" name="email" maxlength="40" aria-label="Your email address" required>
-                    <input class="row form-area" placeholder="Subject" type="text" name="subject" maxlength="25" aria-label="Message subject" required>
-
-                    <textarea class="row form-area" placeholder="How can we help?" name="message" rows="7" maxlength="1000" aria-label="Your message" required ></textarea>
+                    {{ form.email }}
+                    {{ form.subject }}
+                    {{ form.message }}
 
                     <button class="orange-button"> Submit </button>
 
