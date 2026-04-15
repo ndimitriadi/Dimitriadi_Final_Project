@@ -125,11 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let reults_counter = 0; 
 
         blog_card.forEach(card => {
-            const title = card.querySelector('h3').innerText.toLowerCase();
-            const category = card.querySelector('.blog-category').innerText.toLowerCase();
-            const description = card.querySelector('.blog-description').innerText.toLowerCase();
+           const titleElement = card.querySelector('h3');
+                const title = titleElement ? titleElement.innerText.toLowerCase() : "";
+                
+                // This single element holds BOTH your Category and Subcategory text!
+                const categoryElement = card.querySelector('.blog-category');
+                const categories = categoryElement ? categoryElement.innerText.toLowerCase() : "";
+            
 
-            if (title.includes(search_input) || category.includes(search_input) || description.includes(search_input)) {
+            if (title.includes(search_input) || categories.includes(search_input)) {
                 card.style.display = 'flex'; 
                 reults_counter++; 
             } else {

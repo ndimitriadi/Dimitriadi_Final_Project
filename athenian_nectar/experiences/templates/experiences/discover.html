@@ -47,7 +47,9 @@
         <div class="blog-grid">
             
             {% for item in items %}
-                <article class="blog-card" aria-labelledby="blog-title-{{ item.id }}">
+                <article class="blog-card" 
+                        aria-labelledby="blog-title-{{ item.id }}"
+                        data-price="{{item.price}}">
                     
                     <div class="blog-image-wrapper">
                         {% if item.image %}
@@ -55,7 +57,7 @@
                         {% endif %}
                         
                         <span class="blog-category" aria-label="Category: {{ item.category.name }}">
-                            {{ item.category.name }}
+                            {{ item.category.name }} > {{ item.subcategory.name }}
                         </span>
                         
                         <button class="save-button" title="Save to Favorites" data-place="{{ item.title }}" aria-label="Save {{ item.title }} to favorites">
