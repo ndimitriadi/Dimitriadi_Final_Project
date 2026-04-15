@@ -88,7 +88,19 @@ class="welcome-image">
             <div class="carousel-track">
                 {% for review in testimonials %}
                     <div class="card">
-                        <div class="stars" aria-label="{{ review.stars }} out of 5 stars">★★★★★</div>
+                        <div class="stars" aria-label="{{ review.stars }} out of 5 stars">
+                            {% if review.stars == 5 %}
+                                ★★★★★
+                            {% elif review.stars == 4 %}
+                                ★★★★☆
+                            {% elif review.stars == 3 %}
+                                ★★★☆☆
+                            {% elif review.stars == 2 %}
+                                ★★☆☆☆
+                            {% elif review.stars == 1 %}
+                                ★☆☆☆☆
+                            {% endif %}
+                        </div>
                         
                         <p class="quote">{{ review.quote }}</p>
                         
