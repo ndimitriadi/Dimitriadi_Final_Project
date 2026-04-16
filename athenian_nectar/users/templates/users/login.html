@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
+{% endblock %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    
+    <h2 class="login-title">Welcome Back!</h2>
+    
+    <form method="POST">
+        {% csrf_token %} 
+        
+        {{ form.as_p }} 
+        
+        <button type="submit" class="login-button">
+            Login
+        </button>
+    </form>
+
+    <div class="details">
+        Don't have an account? <a href="{% url 'register' %}" class="register-link">Register here</a>
+    </div>
+
+</div>
+
+<dark-mode-toggle></dark-mode-toggle>
+
+{% endblock %}
