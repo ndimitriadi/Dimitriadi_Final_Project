@@ -223,11 +223,14 @@
     border: none;
 }
 
-[data-theme="dark"] .blog-content h3 a {
+[data-theme="dark"] .blog-content h3 a,
+[data-theme="dark"] .price {
     color: #ffffff;
 }
 
-[data-theme="dark"] .blog-description {
+[data-theme="dark"] .blog-description,
+[data-theme="dark"] .blog-rating,
+[data-theme="dark"] .blog-details {
     color: #cccccc;
 }
 
@@ -325,4 +328,84 @@
 
 [data-theme="dark"] #blog-search:focus {
     border-color: #e37e1c;
+}
+
+/* -------------------------------FILTERING ------------------------------- */
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-group {
+    flex: 1 1 auto;
+    min-width: 130px; 
+}
+
+.slider-group {
+    min-width: 180px; 
+    flex: 2;
+}
+
+.filter-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 14px;
+}
+
+.price-highlight {
+    color: #e37e1c;
+}
+
+#price-filter,
+#duration-filter {
+    accent-color: #e37e1c;
+    border: none;
+    width: 100%;
+}
+
+.filter-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--surface-color);
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.filter-control:focus {
+    outline: none;
+    border-color: #e37e1c;
+}
+
+[data-theme="dark"] .filter-label {
+    color: #cccccc;
+}
+
+[data-theme="dark"] .filter-control {
+    background-color: #1e1e1e;
+    border-color: #333333;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .filter-control:focus {
+    border-color: #e37e1c;
+}
+
+[data-theme="dark"] .filter-container {
+    background-color: #1e1e1e;
+    border: none;
 }

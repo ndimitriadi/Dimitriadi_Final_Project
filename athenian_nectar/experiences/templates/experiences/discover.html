@@ -44,12 +44,55 @@
             <input type="text" id="blog-search" placeholder="Search for activities, categories, or keywords" maxlength="25" aria-label="Search blog posts">
         </div>
 
+        <div class="filter-container">
+            
+            <div class="filter-group">
+                <label for="category-filter" class="filter-label">Category</label>
+                <select id="category-filter" class="filter-control">
+                    <option value="">All Categories</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat.name|lower }}">{{ cat.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="subcategory-filter" class="filter-label">Subcategory</label>
+                <select id="subcategory-filter" class="filter-control">
+                    <option value="">All Subcategories</option>
+                    {% for sub in subcategories %}
+                        <option value="{{ sub.name|lower }}" data-parent="{{ sub.category.name|lower }}">
+                            {{ sub.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filter-group slider-group">
+                <label for="duration-filter" class="filter-label">
+                    Max Duration: <span class="price-highlight"><span id="duration-value">12</span> h</span>
+                </label>
+                <input type="range" id="duration-filter" min="0" max="12" step="0.5" value="12">
+            </div>
+
+            <div class="filter-group slider-group">
+                <label for="price-filter" class="filter-label">
+                    Max Price: <span class="price-highlight">€<span id="price-value">500</span></span>
+                </label>
+                <input type="range" id="price-filter" min="0" max="500" value="500">
+            </div>
+
+        </div>
+
         <div class="blog-grid">
             
             {% for item in items %}
                 <article class="blog-card" 
                         aria-labelledby="blog-title-{{ item.id }}"
-                        data-price="{{item.price}}">
+                        data-price="{{item.price}}"
+                        data-category="{{ item.category.name|lower }}"
+                        data-subcategory="{% if item.subcategory %}{{ item.subcategory.name|lower }}{% endif %}"
+                        data-duration="{% if item.duration %}{{ item.duration|lower }}{% endif %}">
                     
                     <div class="blog-image-wrapper">
                         {% if item.image %}
@@ -57,7 +100,7 @@
                         {% endif %}
                         
                         <span class="blog-category" aria-label="Category: {{ item.category.name }}">
-                            {{ item.category.name }} > {{ item.subcategory.name }}
+                            {{ item.category.name }}
                         </span>
                         
                         <button class="save-button" title="Save to Favorites" data-place="{{ item.title }}" aria-label="Save {{ item.title }} to favorites">
@@ -79,7 +122,7 @@
                         <div class="blog-details">
                             {% if item.duration %}
                                 <div>
-                                    <i class="bi bi-clock"></i> {{ item.duration }}
+                                    <i class="bi bi-clock"></i> {{ item.duration }} h
                                 </div>
                             {% endif %}
                         </div>
@@ -100,7 +143,7 @@
 
         <div id="no-results-message" role="status" aria-live="polite" style="display: none;">
             <i class="bi bi-search" aria-hidden="true"></i>
-            <p>We couldn't find any places matching your search. Try a different keyword!</p>
+            <p>We couldn't find any places matching your search. Try a different keyword or filter!</p>
         </div>
 
     </div>

@@ -30,7 +30,7 @@ class Experience(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='experiences/')
     price = models.DecimalField(max_digits=6, decimal_places=2)
-    duration = models.CharField(max_length=50)
+    duration = models.DecimalField(max_digits=3, decimal_places=1)
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=5.0)
     total_reviews = models.IntegerField(default=0)
 

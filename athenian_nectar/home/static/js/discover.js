@@ -150,3 +150,111 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+//FILTERING
+document.addEventListener('DOMContentLoaded', () => {
+
+    const blog_search = document.querySelector('#blog-search');
+    const category_filter = document.querySelector('#category-filter');
+    const subcategory_filter = document.querySelector('#subcategory-filter');
+    const duration_filter = document.querySelector('#duration-filter');
+    const duration_value_display = document.querySelector('#duration-value'); 
+    const price_filter = document.querySelector('#price-filter');
+    const price_value_display = document.querySelector('#price-value');
+    const blog_cards = document.querySelectorAll('.blog-card');
+    const no_results_message = document.querySelector('#no-results-message'); 
+
+    function applyFilters() {
+        //getting user inputs
+        const searchText = blog_search.value.toLowerCase();
+        const catFilter = category_filter.value.toLowerCase();
+        const subFilter = subcategory_filter.value.toLowerCase();
+        const maxDur = parseFloat(duration_filter.value);
+        const maxPrice = parseFloat(price_filter.value);
+
+        let results_counter = 0; 
+
+        blog_cards.forEach(card => {
+            //reading data from each card
+            const titleElement = card.querySelector('h3');
+            const cardTitle = titleElement.innerText.toLowerCase();
+            const cardCat = card.getAttribute('data-category');
+            const cardSub = card.getAttribute('data-subcategory');
+            const cardDur = parseFloat(card.getAttribute('data-duration'));
+            const cardPrice = parseFloat(card.getAttribute('data-price'));
+
+            //checks if cards passes filters
+            const passesText = cardTitle.includes(searchText);
+            const passesCat = (catFilter === "") || (cardCat === catFilter);
+            const passesSub = (subFilter === "") || (cardSub === subFilter);
+            const passesDur = cardDur <= maxDur;
+            const passesPrice = cardPrice <= maxPrice;
+
+            //show or hide the card
+            if (passesText && passesCat && passesSub && passesDur && passesPrice) {
+                card.style.display = 'flex'; 
+                results_counter++; 
+            } else {
+                card.style.display = 'none'; 
+            }
+        });
+
+        if (no_results_message) {
+            if (results_counter === 0) {
+                no_results_message.style.display = 'block';
+            } else {
+                no_results_message.style.display = 'none';
+            }
+        }
+    }
+
+    const inputs = [blog_search, category_filter, subcategory_filter];
+    inputs.forEach(input => {
+        if (input.tagName === 'SELECT') {
+            input.addEventListener('change', applyFilters);
+        } else {
+            input.addEventListener('input', applyFilters);
+        }
+    });
+
+    //reseting subcategory
+    if (category_filter && subcategory_filter) {
+        category_filter.addEventListener('change', () => {
+            const selectedCategory = category_filter.value.toLowerCase();
+            const subOptions = subcategory_filter.querySelectorAll('option');
+
+            subcategory_filter.value = "";
+
+            subOptions.forEach(option => {
+                if (option.value === "") {
+                    option.style.display = 'block';
+                    return;
+                }
+                const parentCategory = option.getAttribute('data-parent');
+                if (selectedCategory === "" || parentCategory === selectedCategory) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+            applyFilters(); 
+        });
+    }
+
+    //price slider
+    price_filter.addEventListener('input', (e) => {
+        if (price_value_display) {
+            price_value_display.textContent = e.target.value; 
+        }
+        applyFilters();
+    });
+    
+    //duration slider
+    duration_filter.addEventListener('input', (e) => {
+        if (duration_value_display) {
+            duration_value_display.textContent = e.target.value; 
+        }
+        applyFilters();
+    });
+
+});
