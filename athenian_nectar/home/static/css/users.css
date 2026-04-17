@@ -6,7 +6,8 @@
     border-radius: 20px; 
     box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
     text-align: left; 
-    margin-bottom: 150px;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .login-title {
@@ -98,4 +99,17 @@
 [data-theme="dark"] .login-container input:focus {
     border-color: #e37e1c;
     outline: none;
+}
+
+ul.errorlist {
+    color: #d93838; 
+    font-size: 13px; 
+    list-style-type: none; 
+    padding: 0;
+    margin: -10px 0 15px 0; 
+
+}
+
+ul.errorlist li {
+    margin-bottom: 5px;
 }
