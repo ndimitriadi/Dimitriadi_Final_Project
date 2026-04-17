@@ -73,13 +73,24 @@
             <div class="activity-section">
                 <h3><i class="bi bi-bookmark-fill"></i> My Favorites</h3>
                 {% if favorites %}
-                    <ul>
+                    <div class="favorites-grid">
                         {% for item in favorites %}
-                            <li>{{ item.name }}</li>
+                            <div class="favorite-mini-card" id="favorite-card-{{ item.id }}">
+                                
+                                <a href="#" class="favorite-content">
+                                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                                    
+                                    <div class="favorite-details">
+                                        <h4>{{ item.title }}</h4>
+                                        <span class="favorite-price">€{{ item.price }}</span>
+                                    </div>
+                                </a>
+                                
+                            </div>
                         {% endfor %}
-                    </ul>
+                    </div>
                 {% else %}
-                    <p class="empty-message">Your favorites is currently empty. Start exploring!</p>
+                    <p class="empty-message">Your favorites list is currently empty. Start exploring!</p>
                 {% endif %}
             </div>
 

@@ -61,58 +61,6 @@ async function athens_weather() {
 document.addEventListener("DOMContentLoaded", athens_weather);
 
 
-//SAVE BUTTON
-document.addEventListener('DOMContentLoaded', () => {
-    const save_button = document.querySelectorAll('.save-button');
-    
-    let saved_tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-    save_button.forEach(btn => {
-        const place = btn.getAttribute('data-place');
-        const icon = btn.querySelector('i');
-
-        if (saved_tasks.some(task => task.place === place)) {
-            icon.classList.remove('bi-bookmark');
-            icon.classList.add('bi-bookmark-fill');
-        }
-
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Re-fetch in case something was saved in other tab or return an empty array
-            saved_tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            
-            //checking if it is already in the array
-            const taskIndex = saved_tasks.findIndex(task => task.place === place);
-
-            if (taskIndex === -1) {
-                
-                const today = new Date().toISOString().split('T')[0];
-                
-                saved_tasks.push({
-                    place: place,
-                    priority: "medium", 
-                    date: today,
-                    status: "Pending"  
-                });
-                
-                localStorage.setItem('tasks', JSON.stringify(saved_tasks));
-                
-                icon.classList.remove('bi-bookmark');
-                icon.classList.add('bi-bookmark-fill');
-                
-            } else {
-                //unsave
-                saved_tasks.splice(taskIndex, 1);
-                localStorage.setItem('tasks', JSON.stringify(saved_tasks));
-                icon.classList.remove('bi-bookmark-fill');
-                icon.classList.add('bi-bookmark');
-            }
-        });
-    });
-});
-
-
 // SEARCH BUTTON
 document.addEventListener('DOMContentLoaded', () => {
     const blog_search = document.querySelector('#blog-search');
@@ -257,4 +205,65 @@ document.addEventListener('DOMContentLoaded', () => {
         applyFilters();
     });
 
+});
+
+
+//SAVE BUTTON
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const save_button = document.querySelectorAll('.save-button');
+
+    save_button.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault(); 
+            
+            const authorized = this.getAttribute('data-auth') === 'true';
+            
+            //if not logged in
+            if (!authorized) {
+                window.location.href = '/users/login/'; 
+                return;
+            }
+
+            //if logged in
+            const itemId = this.getAttribute('data-id');
+            const icon = this.querySelector('i');
+
+            //making a POST request to save the favorite
+            fetch(`/users/favorite/${itemId}/`, {
+                method: 'POST',
+                headers: { //tells the server how to handle the request
+                    'X-CSRFToken': getCookie('csrftoken'), //security
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                //icon change 
+                if (data.is_favorited) {
+                    icon.classList.remove('bi-bookmark');
+                    icon.classList.add('bi-bookmark-fill');
+                    
+                } else {
+                    icon.classList.remove('bi-bookmark-fill');
+                    icon.classList.add('bi-bookmark');
+                }
+            });
+        });
+    });
+
+    // Helper function to grab Django's CSRF token for the fetch request
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 });

@@ -103,8 +103,18 @@
                             {{ item.category.name }}
                         </span>
                         
-                        <button class="save-button" title="Save to Favorites" data-place="{{ item.title }}" aria-label="Save {{ item.title }} to favorites">
-                            <i class="bi bi-bookmark" aria-hidden="true"></i>
+                        <button class="save-button" 
+                                title="Save to Favorites" 
+                                data-id="{{ item.id }}"
+                                data-auth="{{ user.is_authenticated|yesno:'true,false' }}"
+                                aria-label="Save {{ item.title }} to favorites">
+
+                            {% if user.is_authenticated and item in user.profile.favorites.all %}
+                                <i class="bi bi-bookmark-fill" aria-hidden="true" ></i>
+                            {% else %}
+                                <i class="bi bi-bookmark" aria-hidden="true"></i>
+                            {% endif %}
+
                         </button>
                     </div>
                     
