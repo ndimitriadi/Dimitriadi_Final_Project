@@ -103,7 +103,7 @@ ul.errorlist li {
 
 .dashboard-container {
     max-width: 1440px;
-    margin: 40px auto;
+    margin: 70px auto;
     padding: 0 20px;
 }
 
@@ -154,8 +154,6 @@ ul.errorlist li {
     margin: 25px 0;
 }
 
-
-
 [data-theme="dark"] .login-container,
 [data-theme="dark"] .dashboard-card {
     background-color: #1e1e1e; 
@@ -187,13 +185,6 @@ ul.errorlist li {
 
 [data-theme="dark"] hr {
     border-color: #333;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr; 
-    }
 }
 
 /*SUCCESS MESSAGES*/
@@ -288,4 +279,55 @@ ul.errorlist li {
 [data-theme="dark"] .favorite-mini-card {
     background: #2a2a2a;
     border: none;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .favorites-grid {
+        /* Locks the cards at exactly 220px wide */
+        grid-template-columns: repeat(auto-fill, 220px);
+        justify-content: center;
+    }
+}
+
+/*SHOW MORE BUTTON*/
+.hidden-card {
+    display: none;
+}
+
+.show-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.show-more-button {
+    background-color: #fdfdfd;
+    border: 1px solid #ccc;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-family: inherit;
+}
+
+.show-more-button:hover {
+    background-color: #e37e1c;
+    color: white;
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .show-more-button {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: none;
+}
+[data-theme="dark"] .show-more-button:hover {
+    background-color: #e37e1c;
 }

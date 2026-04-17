@@ -251,12 +251,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Helper function to grab Django's CSRF token for the fetch request
+    // Helper function to grab Django's CSRF token for the fetch request, in order for the POST request to be executed safetly
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
             const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
+            for (let i = 0; i < cookies.length; i++) { //looping through the cookies until we find the one we are looking for (csrf token)
                 const cookie = cookies[i].trim();
                 if (cookie.substring(0, name.length + 1) === (name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));

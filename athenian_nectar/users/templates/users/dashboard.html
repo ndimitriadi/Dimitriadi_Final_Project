@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'css/users.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+    <script src="{% static 'js/dashboard.js' %}" defer></script>
+{% endblock %}
+
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
@@ -89,6 +93,13 @@
                             </div>
                         {% endfor %}
                     </div>
+                    {% if favorites|length > 8 %}
+                        <div class="show-more-container" id="show-more-container">
+                            <button id="show-more-button" class="show-more-button">
+                                Show More
+                            </button>
+                        </div>
+                    {% endif %}
                 {% else %}
                     <p class="empty-message">Your favorites list is currently empty. Start exploring!</p>
                 {% endif %}
