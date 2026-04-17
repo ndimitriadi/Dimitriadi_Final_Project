@@ -59,33 +59,6 @@
     text-decoration: none;
 }
 
-.admin-actions {
-    display: flex;
-    gap: 15px;
-}
-
-.action-button {
-    font-size: 12px;
-    font-weight: bold;
-    display: flex;
-    gap: 5px;
-    transition: all 0.2s ease;
-}
-
-.action-button.add-button {
-    color: #28a745;
-}
-.action-button.add-button:hover {
-    transform: translateY(-1px);
-}
-
-.action-button.change-button {
-    color: #e37e1c;
-}
-.action-button.change-button:hover {
-    transform: translateY(-1px);
-}
-
 /*ADD EXPERIENCE*/
 
 .add-container {
@@ -105,6 +78,14 @@
     height: fit-content;
 }
 
+.admin-side-title {
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #e37e1c;
+    color:#e37e1c;
+    text-align: left;
+}
 
 .side-title {
     background-color: #fafafa;
@@ -132,17 +113,6 @@
     background-color: #fff4ea;
     color: #e37e1c;
     border-left: 4px solid #e37e1c;
-}
-
-.plus-icon {
-    color: #e37e1c;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.plus-icon i {
-    font-size: 18px;
-    font-weight: bolder;
 }
 
 /* add card*/
@@ -288,3 +258,142 @@
     border-width: 0;
     transition: all 0.4s ease-in-out;
 }
+
+/* ==========================================================================
+   INLINE TABLE EDITING STYLES
+   ========================================================================== */
+
+.mt-5 {
+    margin-top: 40px;
+}
+
+.hq-table-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.hq-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid #eee;
+    background-color: #fafafa;
+}
+
+.hq-table-title {
+    color: #e37e1c;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.hq-badge {
+    background-color: #fff4ea;
+    color: #e37e1c;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #fbdcbf;
+}
+
+.hq-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.hq-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.hq-table th {
+    background-color: #ffffff;
+    color: #777;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 15px 25px;
+    border-bottom: 2px solid #f0f0f0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hq-table td {
+    padding: 15px 25px;
+    border-bottom: 1px solid #f5f5f5;
+    color: #555;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+
+.hq-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.hq-table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+/* --- NEW EXTRACTED CLASSES (No inline styles!) --- */
+.table-title-text {
+    font-weight: bold;
+    color: #444;
+}
+
+.table-desc-text {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.row-delete-warning {
+    background-color: #fff5f5 !important;
+}
+
+/* --- INLINE EDITING LOGIC --- */
+.edit-mode,
+.edit-actions,
+.delete-actions {
+    display: none;
+}
+
+.interactive-table textarea {
+    font-size: 0.9rem;
+    resize: vertical;
+    min-height: 70px;
+}
+
+.interactive-table input,
+.interactive-table select {
+    font-size: 0.9rem;
+}
+
+.action-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.inline-btn {
+    background: transparent;
+    border: none;
+    color: #555;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.inline-btn:hover { background-color: #f5f5f5; color: #111; }
+.inline-btn.text-success:hover { background-color: #e6f4ea; color: #1e7e34 !important; }
+.inline-btn.text-danger:hover { background-color: #fce8e9; color: #dc3545 !important; }

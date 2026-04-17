@@ -15,25 +15,30 @@
 {% block content %}
 <div class="add-container">
     
-    <aside class="sidebar">       
+    <div class="sidebar">   
+        <div class="admin-side-title">
+            <a href="{% url 'admin_panel' %}">Admin Panel</a>
+        </div> 
+
         <div>
             <div class="side-title">Authentication</div>
-            <a href="#" class="side-link">Users <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+            <a href="#" class="side-link">Users</a>
         </div>
 
         <div>
             <div class="side-title">Experiences</div>
-            <a href="#" class="side-link">Categories <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
-            <a href="#" class="side-link active">Experiences <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
-            <a href="#" class="side-link">Subcategories <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+            <a href="#" class="side-link">Categories </a>
+            <a href="#" class="side-link active">Experiences </a>
+            <a href="#" class="side-link">Subcategories </a>
         </div>
         
         <div>
             <div class="side-title">Home</div>
-            <a href="#" class="side-link">Testimonials <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+            <a href="#" class="side-link">Testimonials</a>
         </div>
-    </aside>
+    </div>
 
+    <div class="admin-workspace">
     <div class="add-card">
 
         <div class="admin-card">
@@ -73,6 +78,83 @@
         </div>
     </div>
 
+   <div class="hq-table-card shadow-sm mt-5">
+            <div class="hq-table-header">
+                <h3 class="hq-table-title">Manage Experiences</h3>
+                <span class="hq-badge">{{ experiences|length }} Total</span>
+            </div>
+
+            <div class="hq-table-container">
+                <table class="hq-table interactive-table" id="experience_table">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-geo-alt"></i> Title</th>
+                            <th><i class="bi bi-tag"></i> Category</th>
+                            <th><i class="bi bi-currency-euro"></i> Price</th>
+                            <th><i class="bi bi-text-left"></i> Description</th>
+                            <th class="text-center"><i class="bi bi-grid"></i> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="experience_table_body">
+                        {% for exp in experiences %}
+                        <tr class="interactive-row" data-id="{{ exp.id }}">
+                            
+                            <td class="col-title">
+                                <div class="view-mode table-title-text">{{ exp.title }}</div>
+                                <textarea class="edit-mode form-control" rows="2">{{ exp.title }}</textarea>
+                            </td>
+                            
+                            <td class="col-category">
+                                <div class="view-mode">{{ exp.category }}</div>
+                                <select class="edit-mode form-select">
+                                    <option value="Food & Drink" {% if exp.category == 'Food & Drink' %}selected{% endif %}>Food & Drink</option>
+                                    <option value="Tours" {% if exp.category == 'Tours' %}selected{% endif %}>Tours</option>
+                                    <option value="Nightlife" {% if exp.category == 'Nightlife' %}selected{% endif %}>Nightlife</option>
+                                </select>
+                            </td>
+                            
+                            <td class="col-price">
+                                <div class="view-mode">€{{ exp.price }}</div>
+                                <div class="edit-mode input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="number" class="form-control" value="{{ exp.price }}" step="0.01">
+                                </div>
+                            </td>
+
+                            <td class="col-description">
+                                <div class="view-mode table-desc-text" title="{{ exp.description }}">
+                                    {{ exp.description }}
+                                </div>
+                                <textarea class="edit-mode form-control" rows="2">{{ exp.description }}</textarea>
+                            </td>
+                            
+                            <td class="col-actions text-center">
+                                <div class="action-group view-actions">
+                                    <button type="button" class="inline-btn edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
+                                    <button type="button" class="inline-btn delete-btn"><i class="bi bi-trash3"></i> Delete</button>
+                                </div>
+                                
+                                <div class="action-group edit-actions">
+                                    <button type="button" class="inline-btn cancel-edit-btn text-muted"><i class="bi bi-x-lg"></i> Cancel</button>
+                                    <button type="button" class="inline-btn save-btn text-success"><i class="bi bi-floppy"></i> Save</button>
+                                </div>
+
+                                <div class="action-group delete-actions">
+                                    <button type="button" class="inline-btn cancel-delete-btn text-muted"><i class="bi bi-x-circle"></i> No</button>
+                                    <button type="button" class="inline-btn confirm-delete-btn text-danger"><i class="bi bi-trash3-fill"></i> Yes</button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center py-4 text-muted">No experiences added yet.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <dark-mode-toggle></dark-mode-toggle>

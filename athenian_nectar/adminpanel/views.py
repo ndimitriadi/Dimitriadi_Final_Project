@@ -33,8 +33,11 @@ def add_experience(request):
     else:
         form = ExperienceForm()
         
+    all_experiences = Experience.objects.all().order_by('-id') 
+        
     context = {
         'form': form,
+        'experiences': all_experiences, 
         'action': 'Add New Experience'
     }
     return render(request, 'adminpanel/add_experiences', context)
