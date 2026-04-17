@@ -50,7 +50,7 @@
     background-color: #e37e1c;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     font-size: 15px;
     font-family: inherit;
     font-weight: bold;
@@ -120,7 +120,7 @@ ul.errorlist li {
 }
 
 .dashboard-card {
-    background: var(--bg-color, #ffffff);
+    background: var(--bg-color);
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);

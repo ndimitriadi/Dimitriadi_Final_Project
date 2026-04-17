@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from experiences.models import Experience
 from .models import Profile
+
 # Create your views here.
 
 def register(request):
@@ -64,7 +65,7 @@ def dashboard(request):
 
 def favorite(request, item_id):
     if request.method == 'POST':
-        experience = get_object_or_404(Experience, id=item_id)
+        experience = get_object_or_404(Experience, id=item_id) #if the object doesnt exist, it will be handled with a 404
         profile = request.user.profile
         
         if experience in profile.favorites.all():

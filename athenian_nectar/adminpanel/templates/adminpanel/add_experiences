@@ -1,0 +1,79 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/adminpanel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/adminpanel.js' %}" defer></script>
+{% endblock %}
+
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+<div class="add-container">
+    
+    <aside class="sidebar">       
+        <div>
+            <div class="side-title">Authentication</div>
+            <a href="#" class="side-link">Users <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+        </div>
+
+        <div>
+            <div class="side-title">Experiences</div>
+            <a href="#" class="side-link">Categories <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+            <a href="#" class="side-link active">Experiences <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+            <a href="#" class="side-link">Subcategories <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+        </div>
+        
+        <div>
+            <div class="side-title">Home</div>
+            <a href="#" class="side-link">Testimonials <span class="plus-icon"><i class="bi bi-plus"></i> Add</span></a>
+        </div>
+    </aside>
+
+    <div class="add-card">
+
+        <div class="admin-card">
+
+            <h2 class="admin-title">Experiences</h2>
+            <div class="top-buttons">
+                <button class="add-btn" id="add_button"><i class="bi bi-plus-lg" aria-hidden="true"></i> Add</button>
+            </div>
+
+            <div id="tasks_form_container" class="form-container">
+                <form id="tasks_form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div>
+                        {% for field in form %}
+                        <div class="form-rows">
+                            <div class="form-label">
+                                <label>{{ field.label }}:</label>
+                            </div>
+                            
+                            <div class="form-input">
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="errors">{{ field.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="button" id="cancel_task_button" class="cancel-btn">Cancel</button>
+                        <button type="submit" name="_save" class="orange-button">Save</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+
+</div>
+
+<dark-mode-toggle></dark-mode-toggle>
+{% endblock %}
