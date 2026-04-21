@@ -21,7 +21,7 @@ class Subcategory(models.Model):
         verbose_name_plural = "Subcategories"
 
     def __str__(self):
-        return f"{self.category.name} - {self.name}"
+        return self.name
 
 class Experience(models.Model):
     title = models.CharField(max_length=200)

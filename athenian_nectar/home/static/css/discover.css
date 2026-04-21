@@ -32,7 +32,6 @@
 
 /* ---------------WEATHER API -------------------------------*/
 .weather-card {
-    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 25px 35px; 
     display: flex;
@@ -85,10 +84,9 @@
 }
 
 .blog-card {
-    border: 1px solid var(--border-color);
     border-radius: 16px;
     overflow: hidden; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -339,10 +337,9 @@
     gap: 20px;
     align-items: flex-end;
     padding: 20px;
-    border: 1px solid var(--border-color);
     border-radius: 16px;
     margin-bottom: 40px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

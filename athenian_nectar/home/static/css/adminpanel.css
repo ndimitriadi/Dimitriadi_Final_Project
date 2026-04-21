@@ -183,13 +183,6 @@
     transform: translateY(-1px);
 }
 
-.top-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
 .add-btn {
     width: auto;
     padding: 12px 30px;
@@ -238,162 +231,74 @@
     margin-top: 25px; 
 }
 
-#tasks_form_container.show-form {
-    max-height: 950px; 
-    opacity: 1;
-    visibility: visible;
-    margin-bottom: 30px;
-    border-width: 1px;
-}
+/* experiences table */
 
-#tasks_form_container {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    visibility: hidden;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    border-width: 0;
-    transition: all 0.4s ease-in-out;
-}
-
-/* ==========================================================================
-   INLINE TABLE EDITING STYLES
-   ========================================================================== */
-
-.mt-5 {
-    margin-top: 40px;
-}
-
-.hq-table-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    overflow: hidden;
-}
-
-.hq-table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 30px;
-    border-bottom: 1px solid #eee;
-    background-color: #fafafa;
-}
-
-.hq-table-title {
-    color: #e37e1c;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-.hq-badge {
-    background-color: #fff4ea;
-    color: #e37e1c;
-    padding: 5px 12px;
+.admin-table-card {
+    background: var(--bg-color);
+    padding: 30px;
     border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border: 1px solid #fbdcbf;
-}
-
-.hq-table-container {
-    width: 100%;
-    overflow-x: auto;
-}
-
-.hq-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.hq-table th {
-    background-color: #ffffff;
-    color: #777;
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 15px 25px;
-    border-bottom: 2px solid #f0f0f0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.hq-table td {
-    padding: 15px 25px;
-    border-bottom: 1px solid #f5f5f5;
-    color: #555;
-    vertical-align: middle;
-    font-size: 0.95rem;
-}
-
-.hq-table tbody tr {
-    transition: background-color 0.2s ease;
-}
-
-.hq-table tbody tr:hover {
-    background-color: #fafafa;
-}
-
-/* --- NEW EXTRACTED CLASSES (No inline styles!) --- */
-.table-title-text {
-    font-weight: bold;
-    color: #444;
-}
-
-.table-desc-text {
-    max-width: 250px;
-    white-space: nowrap;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-.row-delete-warning {
-    background-color: #fff5f5 !important;
+.admin-table th:nth-child(1) { width: 60%; } /* Title */
+.admin-table th:nth-child(2) { width: 10%; } /* Actions */
+
+.admin-table th {
+    text-align: left;
+    padding: 15px;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--text-muted);
+    font-weight: 600;
 }
 
-/* --- INLINE EDITING LOGIC --- */
-.edit-mode,
-.edit-actions,
-.delete-actions {
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    vertical-align: middle;
+}
+
+
+.admin-table tr:nth-child(even) {
+    background-color: #f3f3f3a8; 
+}
+
+.hidden-description {
     display: none;
 }
 
-.interactive-table textarea {
-    font-size: 0.9rem;
-    resize: vertical;
-    min-height: 70px;
+.empty {
+    padding: 20px;
+    text-align: center;
+    color: #888;
 }
 
-.interactive-table input,
-.interactive-table select {
-    font-size: 0.9rem;
-}
-
-.action-group {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.inline-btn {
-    background: transparent;
+.action-btn {
+    background: none;
     border: none;
-    color: #555;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    margin-right: 10px;
+    transition: 0.2s;
+    color: var(--text-muted);
 }
 
-.inline-btn:hover { background-color: #f5f5f5; color: #111; }
-.inline-btn.text-success:hover { background-color: #e6f4ea; color: #1e7e34 !important; }
-.inline-btn.text-danger:hover { background-color: #fce8e9; color: #dc3545 !important; }
+.action-btn:hover {
+    color: #e37e1c;
+    transform: scale(1.1);
+}
+
+.manage-experiences{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+.actions{
+    display: flex;
+    justify-content: center; /* Centers them in the cell */
+    align-items: center;     /* Aligns them vertically */
+    gap: 10px;
+}

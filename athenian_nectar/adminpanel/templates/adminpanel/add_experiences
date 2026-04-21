@@ -13,6 +13,8 @@
 {% block title %}Admin Panel{% endblock %}
 
 {% block content %}
+{{ category_map|json_script:"dynamic-category-map" }}
+
 <div class="add-container">
     
     <div class="sidebar">   
@@ -37,20 +39,16 @@
             <a href="#" class="side-link">Testimonials</a>
         </div>
     </div>
+        
+    <div class = "manage-experiences">
+        <div class="admin-table-card ">
+            <h2 class="admin-title" id="form_title">Add Experience</h2>
 
-    <div class="admin-workspace">
-    <div class="add-card">
-
-        <div class="admin-card">
-
-            <h2 class="admin-title">Experiences</h2>
-            <div class="top-buttons">
-                <button class="add-btn" id="add_button"><i class="bi bi-plus-lg" aria-hidden="true"></i> Add</button>
-            </div>
-
-            <div id="tasks_form_container" class="form-container">
+            <div id="#tasks_form_container">
                 <form id="tasks_form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+                    
+                    <input type="hidden" name="experience_id" id="hidden_experience_id" value="">
                     
                     <div>
                         {% for field in form %}
@@ -58,7 +56,6 @@
                             <div class="form-label">
                                 <label>{{ field.label }}:</label>
                             </div>
-                            
                             <div class="form-input">
                                 {{ field }}
                                 {% if field.errors %}
@@ -70,84 +67,51 @@
                     </div>
 
                     <div class="form-buttons">
-                        <button type="button" id="cancel_task_button" class="cancel-btn">Cancel</button>
-                        <button type="submit" name="_save" class="orange-button">Save</button>
+                        <button type="button" id="cancel_task_button" class="cancel-btn">Clear Form</button>
+                        <button type="submit" id="save_button" class="orange-button">Save</button>
                     </div>
                 </form>
             </div>            
         </div>
-    </div>
 
-   <div class="hq-table-card shadow-sm mt-5">
-            <div class="hq-table-header">
-                <h3 class="hq-table-title">Manage Experiences</h3>
-                <span class="hq-badge">{{ experiences|length }} Total</span>
-            </div>
-
-            <div class="hq-table-container">
-                <table class="hq-table interactive-table" id="experience_table">
+        <div class="admin-table-card">
+            <div class="admin-table-container">
+                <table class="admin-table" id="experience_table">
                     <thead>
                         <tr>
-                            <th><i class="bi bi-geo-alt"></i> Title</th>
-                            <th><i class="bi bi-tag"></i> Category</th>
-                            <th><i class="bi bi-currency-euro"></i> Price</th>
-                            <th><i class="bi bi-text-left"></i> Description</th>
-                            <th class="text-center"><i class="bi bi-grid"></i> Actions</th>
+                            <th ><i class="bi bi-geo-alt"></i> Title</th>
+                            <th><i class="bi bi-grid"></i> Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="experience_table_body">
+                    <tbody>
                         {% for exp in experiences %}
-                        <tr class="interactive-row" data-id="{{ exp.id }}">
+                        <tr class="table-row" 
+                            data-id="{{ exp.id }}"
+                            data-title="{{ exp.title }}"
+                            data-category="{% if exp.category.id %}{{ exp.category.id }}{% else %}{{ exp.category }}{% endif %}"
+                            data-subcategory="{% if exp.subcategory.id %}{{ exp.subcategory.id }}{% else %}{{ exp.subcategory }}{% endif %}"
+                            data-price="{{ exp.price}}"
+                            data-duration="{{ exp.duration }}"
+                            data-rating="{{ exp.rating }}"
+                            data-total_reviews="{{ exp.total_reviews }}">
                             
-                            <td class="col-title">
-                                <div class="view-mode table-title-text">{{ exp.title }}</div>
-                                <textarea class="edit-mode form-control" rows="2">{{ exp.title }}</textarea>
+                            <td>
+                                {{ exp.title }}
+                                <div class="hidden-description">{{ exp.description }}</div>
                             </td>
-                            
-                            <td class="col-category">
-                                <div class="view-mode">{{ exp.category }}</div>
-                                <select class="edit-mode form-select">
-                                    <option value="Food & Drink" {% if exp.category == 'Food & Drink' %}selected{% endif %}>Food & Drink</option>
-                                    <option value="Tours" {% if exp.category == 'Tours' %}selected{% endif %}>Tours</option>
-                                    <option value="Nightlife" {% if exp.category == 'Nightlife' %}selected{% endif %}>Nightlife</option>
-                                </select>
-                            </td>
-                            
-                            <td class="col-price">
-                                <div class="view-mode">€{{ exp.price }}</div>
-                                <div class="edit-mode input-group">
-                                    <span class="input-group-text">€</span>
-                                    <input type="number" class="form-control" value="{{ exp.price }}" step="0.01">
-                                </div>
-                            </td>
-
-                            <td class="col-description">
-                                <div class="view-mode table-desc-text" title="{{ exp.description }}">
-                                    {{ exp.description }}
-                                </div>
-                                <textarea class="edit-mode form-control" rows="2">{{ exp.description }}</textarea>
-                            </td>
-                            
-                            <td class="col-actions text-center">
-                                <div class="action-group view-actions">
-                                    <button type="button" class="inline-btn edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
-                                    <button type="button" class="inline-btn delete-btn"><i class="bi bi-trash3"></i> Delete</button>
-                                </div>
-                                
-                                <div class="action-group edit-actions">
-                                    <button type="button" class="inline-btn cancel-edit-btn text-muted"><i class="bi bi-x-lg"></i> Cancel</button>
-                                    <button type="button" class="inline-btn save-btn text-success"><i class="bi bi-floppy"></i> Save</button>
-                                </div>
-
-                                <div class="action-group delete-actions">
-                                    <button type="button" class="inline-btn cancel-delete-btn text-muted"><i class="bi bi-x-circle"></i> No</button>
-                                    <button type="button" class="inline-btn confirm-delete-btn text-danger"><i class="bi bi-trash3-fill"></i> Yes</button>
+                            <td>
+                                <div class="actions">
+                                    <button type="button" class="action-btn edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
+                                    <form action="{% url 'delete_experience' exp.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete {{ exp.title|escapejs }}? This cannot be undone.');">
+                                        {% csrf_token %}
+                                        <button type="submit" class="action-btn delete-btn"><i class="bi bi-trash3"></i> Delete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="5" class="text-center py-4 text-muted">No experiences added yet.</td>
+                            <td colspan="2" class="empty">No experiences yet.</td>
                         </tr>
                         {% endfor %}
                     </tbody>

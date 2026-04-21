@@ -7,10 +7,10 @@ class ExperienceForm(forms.ModelForm):
         fields = ['title', 'category', 'subcategory', 'description', 'image', 'price', 'duration', 'rating', 'total_reviews'] 
         
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '40'}),
             'category': forms.Select(attrs={'class': 'form-select'}), 
             'subcategory': forms.Select(attrs={'class': 'form-select'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 6}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 6, 'maxlength': '3000'}),
             'image': forms.FileInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5'}),
             'duration': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5'}),
