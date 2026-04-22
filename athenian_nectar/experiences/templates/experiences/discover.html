@@ -126,13 +126,13 @@
                         </div>
 
                         <h3 id="blog-title-{{ item.id }}">
-                            <a href="#">{{ item.title }}</a>
+                            <a href="{% url 'experience_detail' item.id %}">{{ item.title }}</a>
                         </h3>
                         
                         <div class="blog-details">
                             {% if item.duration %}
                                 <div>
-                                    <i class="bi bi-clock"></i> {{ item.duration }} h
+                                    <i class="bi bi-clock"></i> {{ item.duration }} h (approx.)
                                 </div>
                             {% endif %}
                         </div>
@@ -142,7 +142,7 @@
                                 <b>from €{{ item.price }}</b>
                             </span>
                             
-                            <a href="#" class="read-more">
+                            <a href="{% url 'experience_detail' item.id %}" class="read-more">
                                 <b> Read More <span aria-hidden="true">→</span></b> 
                             </a>
                         </div>
@@ -162,7 +162,5 @@
 <button id="back-to-top" aria-label="Scroll back to top">
     <i class="bi bi-arrow-up" aria-hidden="true"></i>
 </button>
-
-<dark-mode-toggle></dark-mode-toggle>
 
 {% endblock %}

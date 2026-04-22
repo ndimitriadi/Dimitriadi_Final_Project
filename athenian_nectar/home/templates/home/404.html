@@ -1,0 +1,20 @@
+{% extends 'home/base.html' %} {% load static %}
+
+{% block title %}Page Not Found | Athenian Nectar{% endblock %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; padding: 20px;">
+    
+    <h1 style="font-size: 6rem; color: #e37e1c; margin-bottom: 0;">404</h1>
+    <h2 style="font-size: 2rem; margin-top: 10px; margin-bottom: 20px;">Oops! You wandered off the map.</h2>
+    
+    <p style="color: #666; max-width: 500px; margin-bottom: 30px; line-height: 1.6;">
+        We can't seem to find the page you're looking for. It might have been removed, had its name changed, or is temporarily unavailable.
+    </p>
+
+    <a href="{% url 'home' %}" style="background-color: #e37e1c; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: bold; transition: all 0.2s ease;">
+        Take Me Home
+    </a>
+
+</div>
+{% endblock %}

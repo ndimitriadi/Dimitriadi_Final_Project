@@ -89,7 +89,7 @@
                         {% for item in favorites %}
                             <div class="favorite-mini-card" id="favorite-card-{{ item.id }}">
                                 
-                                <a href="#" class="favorite-content">
+                                <a href="{% url 'experience_detail' item.id %}" class="favorite-content">
                                     <img src="{{ item.image.url }}" alt="{{ item.title }}">
                                     
                                     <div class="favorite-details">
@@ -134,5 +134,4 @@
     </div>
 </div>
 
-<dark-mode-toggle></dark-mode-toggle>
 {% endblock %}

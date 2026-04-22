@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Experience, Category, Subcategory
 
 # Create your views here.
@@ -17,3 +17,12 @@ def discover(request):
     }
 
     return render(request, 'experiences/discover.html', context)
+    
+def experience_detail(request, exp_id):
+    # Go to the database and get the experience where the ID matches the URL
+    experience = get_object_or_404(Experience, id=exp_id)
+    
+    context = {
+        'experience': experience,
+    }
+    return render(request, 'experiences/experience_detail.html', context)

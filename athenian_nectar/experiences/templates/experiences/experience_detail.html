@@ -1,0 +1,84 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}{{ experience.title }}{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/experiences.css' %}">
+    <link rel="stylesheet" href="{% static 'css/discover.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/discover.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+    
+    <div class="detail-path">
+        <a href="{% url 'discover' %}">Discover</a> > 
+        <span>{{ experience.category.name }}</span> > 
+        <span class="active">{{ experience.title }}</span>
+    </div>
+
+    <div class="detail-content">
+        
+        <div class="detail-image-container">
+    
+            <button class="save-button" 
+                    title="Save to Favorites" 
+                    data-id="{{ experience.id }}"
+                    data-auth="{{ user.is_authenticated|yesno:'true,false' }}"
+                    aria-label="Save {{ experience.title }} to favorites">
+
+                {% if user.is_authenticated and experience in user.profile.favorites.all %}
+                    <i class="bi bi-bookmark-fill" aria-hidden="true"></i>
+                {% else %}
+                    <i class="bi bi-bookmark" aria-hidden="true"></i>
+                {% endif %}
+            </button>
+
+            <img src="{{ experience.image.url }}" alt="{{ experience.title }}" class="detail-image">
+            
+        </div>
+
+        <div class="detail-info">
+            
+            <h1 class="detail-title">{{ experience.title }}</h1>
+            
+            <div class="more-details">
+                <span class="detail-price">€{{ experience.price }}</span>
+                <span class="detail-subcategory">{{ experience.subcategory.name }}</span>
+            </div>
+
+
+            <button class="orange-button">Add to Cart</button>
+            
+        </div>
+    </div>
+
+    <div class="quick-info-bar">
+    
+    <div class="quick-info-item">
+        <i class="bi bi-clock"></i>
+        <span>{{ experience.duration }} h (approx.)</span>
+    </div>
+
+    <a href="#reviews-section" class="quick-info-item review-link">
+        <i class="bi bi-star-fill"></i>
+        <span>42 Reviews</span> </a>
+
+</div>
+</div>
+
+<div class="description-container">
+    <h3 class="detail-subtitle">About this experience</h3>
+    <p class="detail-description">{{ experience.description }}</p>
+</div>
+
+<div class="description-container">
+    <h3 class="detail-subtitle">Reviews</h3>
+    <p class="detail-description">{{ experience.description }}</p>
+</div>
+
+{% endblock %}
