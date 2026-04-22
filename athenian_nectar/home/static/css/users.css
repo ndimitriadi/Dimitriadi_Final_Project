@@ -109,7 +109,38 @@ ul.errorlist li {
 
 .dashboard-title {
     color: #e37e1c;
-    margin-bottom: 25px;
+    margin: 0;
+}
+
+.bi-gear-fill {
+  color: white !important;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;          
+    margin-bottom: 25px;         
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;  
+}
+
+.admin-panel-button {
+    background-color: #e37e1c;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 25px;      
+    font-weight: bold;
+    font-size: 12px;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.admin-panel-button:hover {
+    background-color: #c96b14;
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
 }
 
 .dashboard-grid {

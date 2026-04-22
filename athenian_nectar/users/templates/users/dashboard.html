@@ -14,7 +14,15 @@
 {% block content %}
 <div class="dashboard-container">
     
-    <h1 class="dashboard-title">{{ user.username|title }}'s Dashboard</h1>
+    <div class="dashboard-header">
+        <h1 class="dashboard-title">{{ user.username|title }}'s Dashboard</h1>
+        {% if request.user.is_superuser %}
+            <a href="{% url 'admin_panel' %}" class="admin-panel-button">
+                <i class="bi bi-gear-fill"></i> Admin Panel
+            </a>
+        {% endif %}
+    </div>
+    
 
     {% if messages %}
         <div class="messages-container">
