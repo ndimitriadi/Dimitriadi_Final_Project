@@ -378,7 +378,7 @@
     border: 1px solid var(--border-color);
     font-family: inherit;
     cursor: pointer;
-    background: var(--surface-color);
+    background: var(--bg-color);
     box-sizing: border-box;
     font-size: 14px;
 }

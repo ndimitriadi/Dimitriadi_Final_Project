@@ -152,7 +152,7 @@
 
 /* Filter Controls */
 .controls-card {
-    background: var(--surface-color);
+    background: var(--bg-color);
     padding: 15px 20px;
     border-radius: 12px;
     box-shadow: 0 4px 15px var(--shadow-color);
@@ -185,7 +185,7 @@
 
 /* Table */
 .table-container {
-    background: var(--surface-color);
+    background: var(--bg-color);
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 10px 25px var(--shadow-color);
