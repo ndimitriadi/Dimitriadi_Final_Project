@@ -1,5 +1,5 @@
 from django import forms
-from experiences.models import Experience
+from experiences.models import Experience, Category
 
 class ExperienceForm(forms.ModelForm):
     class Meta:
@@ -16,4 +16,13 @@ class ExperienceForm(forms.ModelForm):
             'duration': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5'}),
             'rating': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.1', 'value': '5.0'}),
             'total_reviews': forms.NumberInput(attrs={'class': 'form-control', 'value': '0'}),
+        }
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '10'}),
         }

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from experiences.models import Experience, Category, Subcategory
-from .forms import ExperienceForm
+from .forms import ExperienceForm, CategoryForm
 # Create your views here.
 
 #admin panel
@@ -61,9 +61,6 @@ def add_experience(request):
 
     return render(request, 'adminpanel/add_experiences', context)
 
-    
-
-
 @user_passes_test(check_admin, login_url='login') 
 def delete_experience(request, exp_id):
     if request.method == 'POST':
@@ -74,3 +71,48 @@ def delete_experience(request, exp_id):
             pass
             
     return redirect('add_experience')
+
+@user_passes_test(check_admin, login_url='login') 
+def add_category(request):
+    if request.method == 'POST':
+        cat_id = request.POST.get('category_id')
+        
+        if cat_id:
+            try:
+                category_to_update = Category.objects.get(id=cat_id)
+                form = CategoryForm(request.POST, request.FILES, instance=category_to_update)
+            except Category.DoesNotExist:
+                form = CategoryForm(request.POST, request.FILES)
+        else:
+
+            form = CategoryForm(request.POST, request.FILES) 
+            
+        if form.is_valid():
+            form.save() 
+            return redirect('add_category') 
+    
+    else:
+        form = CategoryForm()
+        
+    all_categories = Category.objects.all().order_by('-id') 
+        
+    context = {
+        'form': form,
+        'categories': all_categories, 
+    }
+    return render(request, 'adminpanel/add_category.html', context) 
+
+
+@user_passes_test(check_admin, login_url='login') 
+def delete_category(request, cat_id):
+    if request.method == 'POST':
+        try:
+            category_to_delete = Category.objects.get(id=cat_id)
+            category_to_delete.delete()
+        except Category.DoesNotExist:
+            pass 
+            
+    return redirect('add_category')
+
+
+    

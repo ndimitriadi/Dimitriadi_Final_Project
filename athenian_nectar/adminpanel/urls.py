@@ -5,4 +5,6 @@ urlpatterns = [
     path('', views.admin_panel, name='admin_panel'), 
     path('experience/add/', views.add_experience, name='add_experience'),
     path('experience/delete/<int:exp_id>/', views.delete_experience, name='delete_experience'),
+    path('category/add/', views.add_category, name='add_category'),
+    path('category/delete/<int:cat_id>/', views.delete_category, name='delete_category'),
 ]
