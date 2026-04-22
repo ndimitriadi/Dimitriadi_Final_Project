@@ -1,5 +1,5 @@
 from django import forms
-from experiences.models import Experience, Category
+from experiences.models import Experience, Category, Subcategory
 
 class ExperienceForm(forms.ModelForm):
     class Meta:
@@ -22,6 +22,15 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name']
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '10'}),
+        }
+
+class SubcategoryForm(forms.ModelForm):
+    class Meta:
+        model = Subcategory
+        fields = ['category', 'name']
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '10'}),

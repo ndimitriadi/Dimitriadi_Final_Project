@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from experiences.models import Experience, Category, Subcategory
-from .forms import ExperienceForm, CategoryForm
+from .forms import ExperienceForm, CategoryForm, SubcategoryForm
 # Create your views here.
 
 #admin panel
@@ -21,7 +21,7 @@ def admin_panel(request):
     
     return render(request, 'adminpanel/admin_panel.html', context)
 
-#add experience
+#experience
 @user_passes_test(check_admin, login_url='login') 
 def add_experience(request):
     if request.method == 'POST':
@@ -72,6 +72,7 @@ def delete_experience(request, exp_id):
             
     return redirect('add_experience')
 
+#category
 @user_passes_test(check_admin, login_url='login') 
 def add_category(request):
     if request.method == 'POST':
@@ -114,5 +115,42 @@ def delete_category(request, cat_id):
             
     return redirect('add_category')
 
+#subcategory
+@user_passes_test(check_admin, login_url='login') 
+def add_subcategory(request):
+    if request.method == 'POST':
+        sub_id = request.POST.get('subcategory_id')
+        
+        if sub_id:
+            try:
+                sub_to_update = Subcategory.objects.get(id=sub_id)
+                form = SubcategoryForm(request.POST, request.FILES, instance=sub_to_update)
+            except Subcategory.DoesNotExist:
+                form = SubcategoryForm(request.POST, request.FILES)
+        else:
+            form = SubcategoryForm(request.POST, request.FILES) 
+            
+        if form.is_valid():
+            form.save() 
+            return redirect('add_subcategory') 
+    else:
+        form = SubcategoryForm()
+        
+    all_subcategories = Subcategory.objects.select_related('category').all().order_by('-id') 
+        
+    context = {
+        'form': form,
+        'subcategories': all_subcategories, 
+    }
+    return render(request, 'adminpanel/add_subcategory.html', context) 
 
-    
+@user_passes_test(check_admin, login_url='login') 
+def delete_subcategory(request, sub_id):
+    if request.method == 'POST':
+        try:
+            sub_to_delete = Subcategory.objects.get(id=sub_id)
+            sub_to_delete.delete()
+        except Subcategory.DoesNotExist:
+            pass 
+            
+    return redirect('add_subcategory')

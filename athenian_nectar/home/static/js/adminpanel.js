@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //edit/cancel
         cat_table.addEventListener('click', function(e) {
             const category_edit_button = e.target.closest('.edit-btn');
-            const row = category_edit_button.closest('.interactive-row');
+            const row = category_edit_button.closest('.table-row');
             
             const name = row.getAttribute('data-name') || "";
             document.querySelector('#category_form [name="name"]').value = name;
@@ -140,4 +140,45 @@ document.addEventListener('DOMContentLoaded', function() {
             if (category_save_button) category_save_button.innerText = "Save";
         });
     }
+
+//subcategory page
+    const subcat_table = document.querySelector('#subcategory_table');
+    const subcat_form = document.querySelector('#subcategory_form');
+
+    if (subcat_table && subcat_form) {
+        
+        const subcategory_form_title = document.querySelector('#form_title'); 
+        const subcategory_save_button = document.querySelector('#save_button');  
+        const subcategory_id = document.querySelector('#hidden_subcategory_id');
+        const subcategory_cancel_button = document.querySelector('#cancel_subcategory_button');
+
+        subcat_table.addEventListener('click', function(e) {
+            const subcategory_edit_button = e.target.closest('.edit-btn');
+            const row = subcategory_edit_button.closest('.table-row');
+            
+            const name = row.getAttribute('data-name') || "";
+            document.querySelector('#subcategory_form [name="name"]').value = name;
+
+            const category_id = row.getAttribute('data-category') || "";
+            document.querySelector('#subcategory_form [name="category"]').value = category_id;
+
+            if (subcategory_id) subcategory_id.value = row.getAttribute('data-id');
+            if (subcategory_form_title) subcategory_form_title.innerHTML = `Edit Subcategory`;
+            if (subcategory_save_button) subcategory_save_button.innerText = "Update";
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+    
+        subcategory_cancel_button.addEventListener('click', function(e) {
+            e.preventDefault();
+            subcat_form.reset(); 
+            if (subcategory_id) subcategory_id.value = ""; 
+            if (subcategory_form_title) subcategory_form_title.innerText = "Add Subcategory";
+            if (subcategory_save_button) subcategory_save_button.innerText = "Save";
+        });
+    
+    }
+
+
 });

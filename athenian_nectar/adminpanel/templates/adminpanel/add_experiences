@@ -31,7 +31,7 @@
             <div class="side-title">Experiences</div>
             <a href="{% url 'add_category' %}" class="side-link">Categories </a>
             <a href="{% url 'add_experience' %}" class="side-link active">Experiences </a>
-            <a href="#" class="side-link">Subcategories </a>
+            <a href="{% url 'add_subcategory' %}" class="side-link">Subcategories </a>
         </div>
         
         <div>
