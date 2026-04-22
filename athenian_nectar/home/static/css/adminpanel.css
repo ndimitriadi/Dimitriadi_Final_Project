@@ -311,3 +311,19 @@
 .hidden-quote {
     display: none;
 }
+
+.is-superuser{
+    color: #dc3545; 
+}
+
+.is-staff{
+    color: #e37e1c; 
+}
+
+.is-regular{
+    color: #6c757d;
+}
+
+.user-dates{
+    font-size: 12px; 
+}

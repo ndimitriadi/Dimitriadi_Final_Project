@@ -224,4 +224,86 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
+//users page
+    const user_table = document.querySelector('#user_table');
+    const user_form = document.querySelector('#user_form');
+
+    if (user_table && user_form) {
+        
+        const user_form_title = document.querySelector('#form_title'); 
+        const user_save_button = document.querySelector('#save_button');  
+        const user_id = document.querySelector('#hidden_user_id');
+        const user_cancel_button = document.querySelector('#cancel_user_button');
+
+        const old_password = document.querySelector('#user_form [name="old_password"]');
+        let old_password_row = null;
+        if (old_password) {
+        old_password_row = old_password.closest('.form-rows');
+        }
+        
+        if (user_id && user_id.value !== "") {
+            old_password_row.style.display = ''; 
+            if (user_form_title) user_form_title.innerHTML = `Edit User`;
+            if (user_save_button) user_save_button.innerText = "Update User";
+        } else {
+            old_password_row.style.display = 'none'; 
+        }
+        
+        user_table.addEventListener('click', function(e) {
+            
+            const user_edit_button = e.target.closest('.edit-btn');
+            const row = user_edit_button.closest('.table-row');
+            
+            const username = row.getAttribute('data-username') || "";
+            const email = row.getAttribute('data-email') || "";
+            const status = row.getAttribute('data-status') || "user";
+
+            document.querySelector('#user_form [name="username"]').value = username;
+            document.querySelector('#user_form [name="email"]').value = email;
+            document.querySelector('#user_form [name="status"]').value = status;
+            
+            const new_password = document.querySelector('#user_form [name="password"]');
+            if (old_password) old_password.value = "";
+            if (new_password) new_password.value = "";
+
+            //show previous password field
+            if (old_password_row) {
+                old_password_row.style.display = ''; 
+            }
+
+            //this id tells us which user we need to update
+            if (user_id) user_id.value = row.getAttribute('data-id');
+            
+            if (user_form_title) user_form_title.innerHTML = `Edit User`;
+            if (user_save_button) user_save_button.innerText = "Update User";
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        if (user_cancel_button) {
+            user_cancel_button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                //clear form
+                const all_inputs = user_form.querySelectorAll('input:not([type="hidden"]), select');
+                all_inputs.forEach(input => input.value = '');
+                
+                //clearing user id
+                if (user_id) user_id.value = ""; 
+                
+                //removes error messages
+                const errors = user_form.querySelectorAll('.errors');
+                errors.forEach(err => err.remove());
+                
+                //hide previous password field
+                if (old_password_row) {
+                    old_password_row.style.display = 'none';
+                }
+
+                if (user_form_title) user_form_title.innerText = "Add New User";
+                if (user_save_button) user_save_button.innerText = "Save";
+            });
+        }
+    }
 });

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from experiences.models import Experience, Category, Subcategory
 from home.models import Testimonial
-from .forms import ExperienceForm, CategoryForm, SubcategoryForm, TestimonialForm
+from .forms import ExperienceForm, CategoryForm, SubcategoryForm, TestimonialForm, CustomUserForm
 # Create your views here.
 
 #admin panel
@@ -186,7 +186,6 @@ def add_testimonial(request):
     }
     return render(request, 'adminpanel/add_testimonial.html', context) 
 
-# --- DELETE TESTIMONIAL ---
 @user_passes_test(check_admin, login_url='login') 
 def delete_testimonial(request, t_id):
     if request.method == 'POST':
@@ -197,3 +196,49 @@ def delete_testimonial(request, t_id):
             pass 
             
     return redirect('add_testimonial')
+
+#users
+@user_passes_test(check_admin, login_url='login') 
+def add_user(request):
+    edit_id = None 
+    
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        edit_id = user_id #savign id if there are errors
+        
+        if user_id:
+            try:
+                user_to_update = User.objects.get(id=user_id)
+                form = CustomUserForm(request.POST, instance=user_to_update)
+            except User.DoesNotExist:
+                form = CustomUserForm(request.POST)
+        else:
+            form = CustomUserForm(request.POST) 
+            
+        if form.is_valid():
+            form.save() 
+            return redirect('add_user') 
+    else:
+        form = CustomUserForm()
+        
+    all_users = User.objects.all().order_by('-date_joined') 
+        
+    context = {
+        'form': form,
+        'users': all_users, 
+        'edit_id': edit_id,
+    }
+    return render(request, 'adminpanel/add_user.html', context)
+
+@user_passes_test(check_admin, login_url='login') 
+def delete_user(request, user_id):
+    if request.method == 'POST':
+        try:
+            user_to_delete = User.objects.get(id=user_id)
+            #preventing logged in user from deleting themselves
+            if user_to_delete.id != request.user.id:
+                user_to_delete.delete()
+        except User.DoesNotExist:
+            pass 
+            
+    return redirect('add_user')
