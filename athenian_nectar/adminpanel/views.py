@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
 from experiences.models import Experience, Category, Subcategory
-from .forms import ExperienceForm, CategoryForm, SubcategoryForm
+from home.models import Testimonial
+from .forms import ExperienceForm, CategoryForm, SubcategoryForm, TestimonialForm
 # Create your views here.
 
 #admin panel
@@ -59,7 +60,7 @@ def add_experience(request):
         'category_map': category_map,
     }
 
-    return render(request, 'adminpanel/add_experiences', context)
+    return render(request, 'adminpanel/add_experiences.html', context)
 
 @user_passes_test(check_admin, login_url='login') 
 def delete_experience(request, exp_id):
@@ -154,3 +155,45 @@ def delete_subcategory(request, sub_id):
             pass 
             
     return redirect('add_subcategory')
+
+
+#testimonial
+@user_passes_test(check_admin, login_url='login') 
+def add_testimonial(request):
+    if request.method == 'POST':
+        t_id = request.POST.get('testimonial_id')
+        
+        if t_id:
+            try:
+                test_to_update = Testimonial.objects.get(id=t_id)
+                form = TestimonialForm(request.POST, request.FILES, instance=test_to_update)
+            except Testimonial.DoesNotExist:
+                form = TestimonialForm(request.POST, request.FILES)
+        else:
+            form = TestimonialForm(request.POST, request.FILES) 
+            
+        if form.is_valid():
+            form.save() 
+            return redirect('add_testimonial') 
+    else:
+        form = TestimonialForm()
+        
+    all_testimonials = Testimonial.objects.all().order_by('-id') 
+        
+    context = {
+        'form': form,
+        'testimonials': all_testimonials, 
+    }
+    return render(request, 'adminpanel/add_testimonial.html', context) 
+
+# --- DELETE TESTIMONIAL ---
+@user_passes_test(check_admin, login_url='login') 
+def delete_testimonial(request, t_id):
+    if request.method == 'POST':
+        try:
+            test_to_delete = Testimonial.objects.get(id=t_id)
+            test_to_delete.delete()
+        except Testimonial.DoesNotExist:
+            pass 
+            
+    return redirect('add_testimonial')

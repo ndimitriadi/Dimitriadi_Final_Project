@@ -180,5 +180,48 @@ document.addEventListener('DOMContentLoaded', function() {
     
     }
 
+//testimonials page
+    const test_table = document.querySelector('#testimonial_table');
+    const test_form = document.querySelector('#testimonial_form');
+
+    if (test_table && test_form) {
+        
+        const t_form_title = document.querySelector('#form_title'); 
+        const t_save_button = document.querySelector('#save_button');  
+        const t_id = document.querySelector('#hidden_testimonial_id');
+        const t_cancel_button = document.querySelector('#cancel_testimonial_button');
+
+        test_table.addEventListener('click', function(e) {
+            const t_edit_button = e.target.closest('.edit-btn');
+
+            const row = t_edit_button.closest('.table-row');
+            
+            const name = row.getAttribute('data-name') || "";
+            const role = row.getAttribute('data-role') || "";
+            const stars = row.getAttribute('data-stars') || "";
+            
+            const quoteDiv = row.querySelector('.hidden-quote');
+            const quoteText = quoteDiv ? quoteDiv.textContent : "";
+
+            document.querySelector('#testimonial_form [name="name"]').value = name;
+            document.querySelector('#testimonial_form [name="role"]').value = role;
+            document.querySelector('#testimonial_form [name="quote"]').value = quoteText;
+            document.querySelector('#testimonial_form [name="stars"]').value = stars;
+
+            if (t_id) t_id.value = row.getAttribute('data-id');
+            if (t_form_title) t_form_title.innerHTML = `Edit Testimonial`;
+            if (t_save_button) t_save_button.innerText = "Update";
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        t_cancel_button.addEventListener('click', function(e) {
+            e.preventDefault();
+            test_form.reset(); 
+            if (t_id) t_id.value = ""; 
+            if (t_form_title) t_form_title.innerText = "Add Testimonial";
+            if (t_save_button) t_save_button.innerText = "Save";
+        });
+    }
 
 });

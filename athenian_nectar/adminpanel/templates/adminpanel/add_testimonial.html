@@ -27,26 +27,27 @@
 
         <div>
             <div class="side-title">Experiences</div>
-            <a href="{% url 'add_category' %}" class="side-link active">Categories </a>
+            <a href="{% url 'add_category' %}" class="side-link">Categories </a>
             <a href="{% url 'add_experience' %}" class="side-link">Experiences </a>
             <a href="{% url 'add_subcategory' %}" class="side-link">Subcategories </a>
         </div>
         
         <div>
             <div class="side-title">Home</div>
-            <a href="{% url 'add_testimonial' %}" class="side-link">Testimonials</a>
+            <a href="{% url 'add_testimonial' %}" class="side-link active">Testimonials</a>
         </div>
     </div>
         
-    <div class= "manage-experiences">
-        <div class="admin-table-card">
-            <h2 class="admin-title" id="form_title">Add Category</h2>
+    <div class="manage-experiences">
+        
+        <div class="admin-card">
+            <h2 class="admin-title" id="form_title">Add Testimonial</h2>
 
-            <div id="category_form_container">
-                <form id="category_form" method="POST" enctype="multipart/form-data">
+            <div id="testimonial_form_container">
+                <form id="testimonial_form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
-                    <input type="hidden" name="category_id" id="hidden_category_id" value="">
+                    <input type="hidden" name="testimonial_id" id="hidden_testimonial_id" value="">
                     
                     <div>
                         {% for field in form %}
@@ -65,7 +66,7 @@
                     </div>
 
                     <div class="form-buttons">
-                        <button type="button" id="cancel_category_button" class="cancel-btn">Clear Form</button>
+                        <button type="button" id="cancel_testimonial_button" class="cancel-btn">Clear Form</button>
                         <button type="submit" id="save_button" class="orange-button">Save</button>
                     </div>
                 </form>
@@ -74,26 +75,37 @@
 
         <div class="admin-table-card">
             <div class="admin-table-container">
-                <table class="admin-table" id="category_table">
+                <table class="admin-table" id="testimonial_table">
                     <thead>
                         <tr>
-                            <th><i class="bi bi-tag"></i> Category</th>
+                            <th><i class="bi bi-person-fill"></i> Name</th>
+                            <th><i class="bi bi-star-fill"></i> Rating</th>
                             <th><i class="bi bi-grid"></i> Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for cat in categories %}
+                        {% for t in testimonials %}
                         <tr class="table-row" 
-                                data-id="{{ cat.id }}"
-                                data-name="{{ cat.name }}">
+                                data-id="{{ t.id }}"
+                                data-name="{{ t.name }}"
+                                data-role="{{ t.role }}"
+                                data-stars="{{ t.stars }}">
                                 
-                            <td>{{ cat.name }}</td>
+                            <td>
+                                {{ t.name }} <br>
+                                <span class="t-role">{{ t.role }}</span>
+                                <div class="hidden-quote">{{ t.quote }}</div>
+                            </td>
+                            
+                            <td>
+                                <strong>{{ t.stars }} / 5</strong>
+                            </td>
                             
                             <td>
                                 <div class="actions">
                                     <button type="button" class="action-btn edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
                                     
-                                    <form action="{% url 'delete_category' cat.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete {{ cat.name|escapejs }}? This cannot be undone.');">
+                                    <form action="{% url 'delete_testimonial' t.id %}" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete the testimonial from {{ t.name|escapejs }}? This cannot be undone.');">
                                         {% csrf_token %}
                                         <button type="submit" class="action-btn delete-btn"><i class="bi bi-trash3"></i> Delete</button>
                                     </form>
@@ -102,7 +114,7 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="2" class="empty-state">No categories added yet.</td>
+                            <td colspan="3" class="empty-state">No testimonials added yet.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -110,9 +122,7 @@
             </div>
         </div>
 
-    </div>
-</div>
+    </div> </div>
 
 <dark-mode-toggle></dark-mode-toggle>
-
 {% endblock %}

@@ -1,5 +1,6 @@
 from django import forms
 from experiences.models import Experience, Category, Subcategory
+from home.models import Testimonial
 
 class ExperienceForm(forms.ModelForm):
     class Meta:
@@ -35,3 +36,8 @@ class SubcategoryForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '10'}),
         }
+
+class TestimonialForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = ['name', 'role', 'quote', 'stars']

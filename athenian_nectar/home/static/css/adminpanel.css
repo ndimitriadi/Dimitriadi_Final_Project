@@ -302,3 +302,12 @@
     align-items: center;     /* Aligns them vertically */
     gap: 10px;
 }
+
+.t-role {
+    font-size:14px;
+    color: #888;
+}
+
+.hidden-quote {
+    display: none;
+}

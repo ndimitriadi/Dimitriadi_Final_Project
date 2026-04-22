@@ -7,3 +7,4 @@ class Experience(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=20) 
+
