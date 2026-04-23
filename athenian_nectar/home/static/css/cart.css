@@ -342,3 +342,163 @@
     text-align: center;
     margin-top: 20px;
 }
+
+/*CHECKOUT*/
+.payment-section {
+    padding: 25px;
+    border: 1px solid #e37e1c;
+    border-radius: 15px;
+}
+
+.payment-title {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input{
+    font-size: 14px;
+}
+
+.form-label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.input-icon-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #ccc;
+}
+
+.payment-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.payment-column {
+    flex: 1;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.total-price {
+    color: #e37e1c;
+}
+
+.cart-layout {
+    max-width: 1700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+.checkout-wrapper {
+    margin-top: 40px;
+}
+
+#payment-error{
+    display: none; 
+    background-color: #f8d7da; 
+    color: #721c24; 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin-bottom: 15px; 
+    font-size: 12px;
+}
+
+
+/* CHECKOUT SUCCESS */
+
+.success-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 20px;
+}
+
+.success-content {
+    padding: 50px 40px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);    
+}
+
+.success-icon {
+    font-size: 50px;
+    color: #28a745;
+}
+
+.success-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.success-text {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.success-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.button-dashboard {
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 18px;
+    width: 95%;
+}
+
+.button-discover {
+    color: #e37e1c;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+.button-discover:hover {
+    color: #c96d16;
+    text-decoration: none;
+}
+
+.orange-button:hover{
+    text-decoration: none;
+}

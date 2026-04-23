@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from experiences.models import Experience
 from .models import Order, OrderItem
+from django.contrib.auth.decorators import login_required
 
 def add_to_cart(request, exp_id):
     if request.method == 'POST':
@@ -125,6 +126,29 @@ def checkout(request):
             )
 
         request.session['cart'] = {}
-        return redirect('dashboard')
+        return render(request, 'orders/checkout_success.html', {'order': order})
         
     return redirect('cart_detail')
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    cart_items = []
+    total_price = 0
+
+    for key, item in cart.items():
+        total_item_price = float(item['price']) * item['quantity']
+        total_price += total_item_price
+        cart_items.append({
+            'key': key,
+            'title': item['title'],
+            'price': item['price'],
+            'quantity': item['quantity'],
+            'booking_date': item['booking_date'],
+            'total_item_price': total_item_price,
+        })
+
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price,
+    }
+    return render(request, 'orders/cart.html', context)

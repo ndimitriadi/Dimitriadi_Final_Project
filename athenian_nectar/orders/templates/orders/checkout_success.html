@@ -1,0 +1,34 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="success-container">
+    <div class="success-content">
+        
+        <i class="bi bi-patch-check-fill success-icon"></i>
+        
+        <h2 class="success-title">Booking Successful!</h2>
+        
+        <p class="success-text">
+            Thank you for your purchase. <br>
+            Your Order <strong>#{{ order.id }}</strong> is confirmed.
+        </p>
+        
+        <div class="success-buttons">
+            <a href="{% url 'dashboard' %}" class="orange-button button-dashboard">
+                Go to My Dashboard
+            </a>
+            <a href="{% url 'discover' %}" class="button-discover">
+                Continue Discovering
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

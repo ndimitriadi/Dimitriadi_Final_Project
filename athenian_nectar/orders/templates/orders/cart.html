@@ -8,102 +8,147 @@
     <link rel="stylesheet" href="{% static 'css/experiences.css' %}">
 {% endblock %}
 
+{% block extra_js %}
+    <script src="{% static 'js/cart.js' %}" defer></script>
+{% endblock %}
 
 {% block content %}
-<div class="description-container" >
-    
-    <h1 class="cart-title">Your Cart</h1>
+<div class="cart-layout">
+  
+    <div class="description-container" >
+        
+        <h1 class="cart-title">Your Cart</h1>
 
-    {% if cart_items %}
-        <div class="review-box" id="cart-box">
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Experience</th>
-                        <th>Price</th>
-                        <th>Date & People</th>
-                        <th>Subtotal</th>
-                        <th></th> 
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in cart_items %}
+        {% if cart_items %}
+            <div class="review-box" id="cart-box">
+                <table class="cart-table">
+                    <thead>
                         <tr>
-                            
-                            <td>
-                                <div class="cart-item-info">
-                                    <a href="{% url 'experience_detail' item.experience.id %}">
-                                        <img src="{{ item.experience.image.url }}" alt="{{ item.experience.title }}">
-                                    </a>
-
-                                    <a href="{% url 'experience_detail' item.experience.id %}" class="cart-item-link">
-                                        <strong>{{ item.experience.title }}</strong>
-                                    </a>
-                                </div>
-                            </td>
-                            
-                            <td >€{{ item.experience.price }}</td>
-                            
-                            <td>
-                                <form method="POST" action="{% url 'update_cart' item.item_key %}" class="quantity-form">
-                                    {% csrf_token %}
-
-                                    <div class="cart-date" onclick="this.querySelector('input').showPicker()">
-                                        <i class="bi bi-calendar-event" ></i>
-                                        <input type="date" name="booking_date" value="{{ item.date }}" min="{% now 'Y-m-d' %}" required>
-                                    </div>
-                                    
-                                    
-                                    <i class="bi bi-person" ></i>
-                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="10">
-                                    <button type="submit" class="update-button" title="Update Quantity">
-                                        <i class="bi bi-arrow-clockwise"></i>
-                                    </button>
-                                </form>
-                            </td>
-                            
-                            <td class="subtotal">€{{ item.total_price }}</td>
-                            
-                            <td class="remove-item">
-                                <a href="{% url 'remove_from_cart' item.item_key %}" class="remove-button">
-                                    <i class="bi bi-trash3"></i>
-                                </a>
-                            </td>
-                            
+                            <th>Experience</th>
+                            <th>Price</th>
+                            <th>Date & People</th>
+                            <th>Subtotal</th>
+                            <th></th> 
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for item in cart_items %}
+                            <tr>
+                                <td>
+                                    <div class="cart-item-info">
+                                        <a href="{% url 'experience_detail' item.experience.id %}">
+                                            <img src="{{ item.experience.image.url }}" alt="{{ item.experience.title }}">
+                                        </a>
 
-            <div class="cart-bottom">
-                <div>
+                                        <a href="{% url 'experience_detail' item.experience.id %}" class="cart-item-link">
+                                            <strong>{{ item.experience.title }}</strong>
+                                        </a>
+                                    </div>
+                                </td>
+                                
+                                <td >€{{ item.experience.price }}</td>
+                                
+                                <td>
+                                    <form method="POST" action="{% url 'update_cart' item.item_key %}" class="quantity-form">
+                                        {% csrf_token %}
+
+                                        <div class="cart-date" onclick="this.querySelector('input').showPicker()">
+                                            <i class="bi bi-calendar-event" ></i>
+                                            <input type="date" name="booking_date" value="{{ item.date }}" min="{% now 'Y-m-d' %}" required>
+                                        </div>
+                                        
+                                        
+                                        <i class="bi bi-person" ></i>
+                                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="10">
+                                        <button type="submit" class="update-button" title="Update Quantity">
+                                            <i class="bi bi-arrow-clockwise"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                
+                                <td class="subtotal">€{{ item.total_price }}</td>
+                                
+                                <td class="remove-item">
+                                    <a href="{% url 'remove_from_cart' item.item_key %}" class="remove-button">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </td>
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="cart-bottom">
                     <h2>Total: <span>€{{ cart_total }}</span></h2>
                 </div>
-                
-                <form method="POST" action="{% url 'checkout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="orange-button">
-                        Checkout 
-                    </button>
-                </form>
             </div>
-        </div>
-        
-        <div class="continue-shopping">
-            <a href="{% url 'discover' %}">
-                <i class="bi bi-arrow-left"></i> Continue Shopping
-            </a>
-        </div>
+            
+            <div class="continue-shopping">
+                <a href="{% url 'discover' %}">
+                    <i class="bi bi-arrow-left"></i> Continue Shopping
+                </a>
+            </div>
 
-    {% else %}
-        <div class="empty-cart">
-            <i class="bi bi-cart-x" ></i>
-            <h3>Your cart is empty</h3>
-            <p>Looks like you haven't added any experiences yet.</p>
-            <a href="{% url 'discover' %}">
-                <button class="orange-button">Discover Experiences</button>
-            </a>
+        {% else %}
+            <div class="empty-cart">
+                <i class="bi bi-cart-x" ></i>
+                <h3>Your cart is empty</h3>
+                <p>Looks like you haven't added any experiences yet.</p>
+                <a href="{% url 'discover' %}">
+                    <button class="orange-button">Discover Experiences</button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="checkout-wrapper">
+        <div class="payment-section">
+            <h2 class="payment-title">Payment Method</h2>
+            
+            <form id="payment-form" action="{% url 'checkout' %}" method="POST">
+                {% csrf_token %}
+
+                <div id="payment-error"></div>
+                
+                    <div class="form-group">
+                        <label class="form-label">Cardholder Name</label>
+                        <input type="text" id="card-name" name="card_name" class="form-control" placeholder="Full Name" maxlength="35" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Card Number</label>
+                        <div class="input-icon-wrapper">
+                            <input type="text" id="card-number" name="card_number" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                            <i class="bi bi-credit-card-2-front input-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="payment-row">
+                        <div class="payment-column">
+                            <label class="form-label">Expiration Date</label>
+                            <input type="text" id="card-expiry" name="expiry" class="form-control" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="payment-column">
+                            <label class="form-label">CVV</label>
+                            <input type="text" id="card-cvv" name="cvv" class="form-control" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+
+                    <div class="total-row">
+                        <strong>Total Amount:</strong>
+                        <strong class="total-price">€{{ cart_total }}</strong>
+                    </div>
+
+                    <button type="submit" class="orange-button">
+                        <i class="bi bi-lock-fill"></i> Securely Pay & Book
+                    </button>
+                </div>
+            </form>
         </div>
-    {% endif %}
+    </div>
 </div>
 {% endblock %}
