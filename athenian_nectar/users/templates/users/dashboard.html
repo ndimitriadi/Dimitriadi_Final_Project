@@ -71,6 +71,27 @@
             <div class="activity-section">
                 <h3><i class="bi bi-eye-fill"></i> Previously Viewed</h3>
                 
+                {% if recently_viewed %}
+                    <div class="favorites-grid" id="viewed-grid">
+                        {% for item in recently_viewed %}
+                            <div class="favorite-mini-card">
+                                
+                                <a href="{% url 'experience_detail' item.id %}" class="favorite-content">
+                                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                                    
+                                    <div class="favorite-details">
+                                        <h4>{{ item.title }}</h4>
+                                        <span class="favorite-price">€{{ item.price }}</span>
+                                    </div>
+                                </a>
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                {% else %}
+                    <p class="empty-message">You haven't viewed any experiences yet. Start exploring!</p>
+                {% endif %}
             </div>
 
             <hr class="gray-line">

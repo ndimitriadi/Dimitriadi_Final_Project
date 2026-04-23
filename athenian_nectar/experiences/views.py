@@ -26,6 +26,12 @@ def discover(request):
 def experience_detail(request, exp_id):
     experience = get_object_or_404(Experience, id=exp_id)
     reviews = experience.reviews.all().order_by('-created_at')
+
+    recently_viewed = request.session.get('recently_viewed', [])
+    if exp_id in recently_viewed:
+        recently_viewed.remove(exp_id)
+    recently_viewed.insert(0, exp_id)
+    request.session['recently_viewed'] = recently_viewed[:4]
     
     has_reviewed = False
     if request.user.is_authenticated:

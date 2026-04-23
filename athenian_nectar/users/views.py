@@ -54,6 +54,14 @@ def dashboard(request):
 
     user_reviews = Review.objects.filter(user=request.user).order_by('-created_at')
 
+    recently_viewed_ids = request.session.get('recently_viewed', [])
+    recently_viewed_exps = []
+    
+    if recently_viewed_ids:
+        exps = Experience.objects.filter(id__in=recently_viewed_ids)
+        exp_dict = {exp.id: exp for exp in exps}
+        recently_viewed_exps = [exp_dict[i] for i in recently_viewed_ids if i in exp_dict]
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -62,6 +70,7 @@ def dashboard(request):
         'purchases': [],     
         'favorites': profile.favorites.all(),
         'user_reviews': user_reviews,
+        'recently_viewed': recently_viewed_exps,
     }
     
     return render(request, 'users/dashboard.html', context)

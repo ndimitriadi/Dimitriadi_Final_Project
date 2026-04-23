@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'home',
     'experiences',
     'users',
+    'orders'
     'adminpanel',
     'django.contrib.admin',
     'django.contrib.auth',
