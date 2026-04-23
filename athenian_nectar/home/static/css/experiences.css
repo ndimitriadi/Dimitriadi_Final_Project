@@ -292,3 +292,43 @@
     font-style: italic; 
     margin: 0;
 }
+
+.done-review-box {
+    padding: 40px; 
+    border: 1px dashed var(--border-color); 
+    border-radius: 12px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;        
+    justify-content: center;         
+    align-items: center;          
+    height: 100%;  
+    width: 100%;              
+    min-height: 500px;  
+    box-sizing: border-box;
+}
+
+.small-text{
+    color: #777; 
+    font-size:14px; 
+    margin: 0;
+}
+
+.review-submit{
+    font-size: 40px; 
+    color: #e37e1c; 
+    margin-bottom: 10px; 
+    display: block;
+}
+
+.review-locked{
+    font-size: 40px; 
+    color: #ccc; 
+    margin-bottom: 10px; 
+    display: block;
+}
+
+.login-link{
+    color: #e37e1c; 
+    font-weight: bold;
+}

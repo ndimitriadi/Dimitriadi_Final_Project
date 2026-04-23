@@ -27,9 +27,17 @@ def experience_detail(request, exp_id):
     experience = get_object_or_404(Experience, id=exp_id)
     reviews = experience.reviews.all().order_by('-created_at')
     
+    has_reviewed = False
+    if request.user.is_authenticated:
+        has_reviewed = Review.objects.filter(user=request.user, experience=experience).exists()
+
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('login')
+
+        if has_reviewed:
+            messages.error(request, "You have already reviewed this experience.")
+            return redirect(f"{reverse('experience_detail', args=[experience.id])}#reviews-section")
 
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -46,6 +54,7 @@ def experience_detail(request, exp_id):
         'experience': experience,
         'reviews': reviews,
         'form': form,
+        'has_reviewed': has_reviewed,
     }
     return render(request, 'experiences/experience_detail.html', context)
 

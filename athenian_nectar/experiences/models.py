@@ -54,5 +54,9 @@ class Review(models.Model):
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    #one review per user per experience
+    class Meta:
+        unique_together = ('user', 'experience')
+
     def __str__(self):
         return f"{self.user.username}'s {self.rating}-star review for {self.experience.title}"

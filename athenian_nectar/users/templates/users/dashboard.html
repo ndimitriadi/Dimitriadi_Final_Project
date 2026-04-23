@@ -75,55 +75,7 @@
 
             <hr class="gray-line">
 
-            <div class="activity-section">
-                <h3><i class="bi bi-star-fill"></i> My Ratings</h3>
-                {% if user_reviews %}
-                    <div class="favorites-grid" id="ratings-grid">
-                        {% for review in user_reviews %}
-                            <div class="favorite-mini-card">
-                                
-                                <a href="{% url 'experience_detail' review.experience.id %}#reviews-section" class="favorite-content">
-                                    <img src="{{ review.experience.image.url }}" alt="{{ review.experience.title }}">
-                                    
-                                    <div class="favorite-details">
-                                        <h4>{{ review.experience.title }}</h4>
-                                        
-                                        <div style="color: #e37e1c; font-size: 0.85rem; margin-top: 5px; margin-bottom: 5px;">
-                                            {% for i in "12345"|make_list %}
-                                                {% if forloop.counter <= review.rating %}
-                                                    <i class="bi bi-star-fill"></i>
-                                                {% else %}
-                                                    <i class="bi bi-star"></i>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        
-                                        {% if review.comment %}
-                                            <p style="margin: 0; font-size: 0.8rem; color: #666; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                "{{ review.comment }}"
-                                            </p>
-                                        {% endif %}
-                                    </div>
-                                </a>
-                                
-                            </div>
-                        {% endfor %}
-                    </div>
-                    {% if user_reviews|length > 8 %}
-                        <div class="show-more-container" id="ratings-show-more-container">
-                            <button id="ratings-show-more-button" class="show-more-button">
-                                Show More
-                            </button>
-                        </div>
-                    {% endif %}
-                {% else %}
-                    <p class="empty-message">You haven't rated any experiences yet.</p>
-                {% endif %}
-            </div>
-            
-            <hr class="gray-line">
-
-            <div class="activity-section">
+             <div class="activity-section">
                 <h3><i class="bi bi-bookmark-fill"></i> My Favorites</h3>
                 {% if favorites %}
                     <div class="favorites-grid" id="favorites-grid">
@@ -151,6 +103,48 @@
                     {% endif %}
                 {% else %}
                     <p class="empty-message">Your favorites list is currently empty. Start exploring!</p>
+                {% endif %}
+            </div>
+            
+            <hr class="gray-line">
+
+            <div class="activity-section">
+                <h3><i class="bi bi-star-fill"></i> My Reviews</h3>
+                {% if user_reviews %}
+                    <div class="favorites-grid" id="ratings-grid">
+                        {% for review in user_reviews %}
+                            <div class="favorite-mini-card">
+                                
+                                <a href="{% url 'experience_detail' review.experience.id %}#reviews-section" class="favorite-content">
+                                    <img src="{{ review.experience.image.url }}" alt="{{ review.experience.title }}">
+                                    
+                                    <div class="favorite-details">
+                                        <h4>{{ review.experience.title }}</h4>
+                                        
+                                        <div>
+                                            {% for i in "12345"|make_list %}
+                                                {% if forloop.counter <= review.rating %}
+                                                    <i class="bi bi-star-fill"></i>
+                                                {% else %}
+                                                    <i class="bi bi-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if user_reviews|length > 8 %}
+                        <div class="show-more-container" id="ratings-show-more-container">
+                            <button id="ratings-show-more-button" class="show-more-button">
+                                Show More
+                            </button>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <p class="empty-message">You haven't rated any experiences yet.</p>
                 {% endif %}
             </div>
 
