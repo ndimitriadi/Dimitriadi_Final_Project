@@ -12,5 +12,5 @@ urlpatterns = [
     path('testimonial/add/', views.add_testimonial, name='add_testimonial'),
     path('testimonial/delete/<int:t_id>/', views.delete_testimonial, name='delete_testimonial'),
     path('users/', views.add_user, name='add_user'),
-    path('users/delete/<int:u_id>/', views.delete_user, name='delete_user'),
+    path('users/delete/<int:user_id>/', views.delete_user, name='delete_user'),
 ]

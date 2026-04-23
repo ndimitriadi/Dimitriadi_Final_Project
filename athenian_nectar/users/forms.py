@@ -6,6 +6,7 @@ class CustomRegisterForm(UserCreationForm):
     username = forms.CharField(
         max_length=20, 
         min_length=4, 
+        required=True
     )
 
     email = forms.EmailField(
@@ -32,6 +33,12 @@ class CustomRegisterForm(UserCreationForm):
             if 'password' in field_name.lower():
                 field.widget.attrs['maxlength'] = '30'
 
+    #same email check
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("An account with this email already exists.")
+        return email
 
 class UserUpdateForm(forms.ModelForm):
     username = forms.CharField(max_length=20, min_length=4)

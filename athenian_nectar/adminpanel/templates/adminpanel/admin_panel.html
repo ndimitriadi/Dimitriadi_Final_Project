@@ -16,6 +16,7 @@
 
     <div class="admin-grid">
         
+        {% if request.user.is_superuser %}
         <div class="admin-card">
             <h2 class="card-header">Authentication</h2>
             
@@ -23,6 +24,7 @@
                 <a href="{% url 'add_user' %}" class="card-link">Users</a>
             </div>
         </div>
+        {% endif %}
 
         <div class="admin-card">
             <h2 class="card-header">Discover Page</h2>
