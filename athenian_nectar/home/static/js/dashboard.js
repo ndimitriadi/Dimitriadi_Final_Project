@@ -1,48 +1,50 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-//show more/less button
-    const cards = document.querySelectorAll('.favorite-mini-card');
-    const show_more = document.querySelector('#show-more-button');
-    
-    let initialCount = 8;
-    let currentlyShown = initialCount;
-
-    cards.forEach((card, index) => {
-        if (index >= currentlyShown) {
-            card.classList.add('hidden-card');
-        }
-    });
-
-    show_more.addEventListener('click', function(e) {
-        e.preventDefault();
+    function show_more_button(grid_selector, button_selector, counter) {
         
-        if (this.classList.contains('showing-all')) {
+        const grid = document.querySelector(grid_selector);
+        const button = document.querySelector(button_selector);
 
-            currentlyShown = initialCount;
+        const cards = grid.querySelectorAll('.favorite-mini-card');
+        let shown_cards = counter;
+
+        cards.forEach((card, index) => {
+            if (index >= shown_cards) {
+                card.classList.add('hidden-card');
+            }
+        });
+
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             
-            cards.forEach((card, index) => {
-                if (index >= currentlyShown) {
-                    card.classList.add('hidden-card');
+            if (this.classList.contains('showing-all')) {
+                shown_cards = counter;
+                
+                cards.forEach((card, index) => {
+                    if (index >= shown_cards) {
+                        card.classList.add('hidden-card');
+                    }
+                });
+                
+                this.innerHTML = 'Show More';
+                this.classList.remove('showing-all');
+
+            } else {
+                for (let i = shown_cards; i < shown_cards + counter; i++) {
+                    if (cards[i]) {
+                        cards[i].classList.remove('hidden-card');
+                    }
                 }
-            });
-            
-            this.innerHTML = 'Show More';
-            this.classList.remove('showing-all');
+                
+                shown_cards += counter;
 
-        } else {
-            
-            for (let i = currentlyShown; i < currentlyShown + 8; i++) {
-                if (cards[i]) {
-                    cards[i].classList.remove('hidden-card');
+                if (shown_cards >= cards.length) {
+                    this.innerHTML = 'Show Less';
+                    this.classList.add('showing-all'); 
                 }
             }
-            
-            currentlyShown += 8;
-
-            if (currentlyShown >= cards.length) {
-                this.innerHTML = 'Show Less';
-                this.classList.add('showing-all'); 
-            }
-        }
-    });
+        });
+    }
+    show_more_button('#favorites-grid', '#favorites-show-more-button', 8);
+    show_more_button('#ratings-grid', '#ratings-show-more-button', 8);
 });
