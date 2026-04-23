@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/experiences.css' %}">
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <link rel="stylesheet" href="{% static 'css/discover.css' %}">
+    <link rel="stylesheet" href="{% static 'css/recommendations.css' %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -94,7 +95,7 @@
 <!--description-->
 <div class="description-container" id="about">
     <h3 class="detail-subtitle">About this experience</h3>
-    <p class="detail-description">{{ experience.description }}</p>
+    <p class="detail-description" >{{ experience.description|linebreaksbr }}</p>
 </div>
 
 <!--reviews-->
@@ -194,4 +195,38 @@
     </div>
 </div>
 
+<!--recommendations-->
+{% if recommended_experiences %}
+<div class="recommendations-wrapper">
+    <h3 class="recommendations-title">
+        <i class="bi bi-stars"></i> You might also like...
+    </h3>
+    
+    <div class="recommendations-grid">
+        {% for rec in recommended_experiences %}
+        <div class="rec-card">
+            
+            <div class="rec-image-wrapper">
+                <img src="{{ rec.image.url }}" alt="{{ rec.title }}" class="rec-image">
+            </div>
+            
+            <div class="rec-content">
+                <h5 class="rec-title">{{ rec.title }}</h5>
+                <p class="rec-price">€{{ rec.price }}</p>
+                
+                <a href="{% url 'experience_detail' rec.id %}" class="orange-button rec-button">
+                    View Details
+                </a>
+            </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
+<button id="back-to-top" aria-label="Scroll back to top">
+    <i class="bi bi-arrow-up" aria-hidden="true"></i>
+</button>
 {% endblock %}

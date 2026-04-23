@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from .models import Experience, Category, Subcategory
+from .models import Experience, Category, Subcategory, Review
 from django.contrib import messages
-from .models import Experience, Review
 from .forms import ReviewForm
 from django.views.decorators.http import require_POST
 
@@ -55,12 +54,37 @@ def experience_detail(request, exp_id):
             return redirect(f"{reverse('experience_detail', args=[experience.id])}#about")
     else:
         form = ReviewForm()
+
+    #recommendations based on same category
+    recommended = list(Experience.objects.filter(
+        category=experience.category
+    ).exclude(
+        id=experience.id
+    ).order_by('?')[:3])
+    # order_by('?') shuffles 
+    #[:3] grabs only 3
+
+    #if there are less than 3 experiences matching the category
+    if len(recommended) < 3:
+        empty_spots = 3 - len(recommended)
+        
+        #ids we already have so we don't accidentally duplicate them
+        existing_ids = [rec.id for rec in recommended]
+        existing_ids.append(experience.id)
+        
+        # Grab random experiences to fill the holes
+        fillers = Experience.objects.exclude(
+            id__in=existing_ids
+        ).order_by('?')[:empty_spots]
+        
+        recommended.extend(fillers)
         
     context = {
         'experience': experience,
         'reviews': reviews,
         'form': form,
         'has_reviewed': has_reviewed,
+        'recommended_experiences': recommended,
     }
     return render(request, 'experiences/experience_detail.html', context)
 

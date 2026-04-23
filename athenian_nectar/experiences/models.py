@@ -38,7 +38,7 @@ class Experience(models.Model):
     def __str__(self):
         return self.title
 
-    @property
+    @property #allows calling a method without parameters
     def average_rating(self):
         avg = self.reviews.aggregate(Avg('rating'))['rating__avg']
         
