@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Experience, Category, Subcategory
+from django.contrib import messages
+from .models import Experience, Review
+from .forms import ReviewForm
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -18,11 +22,38 @@ def discover(request):
 
     return render(request, 'experiences/discover.html', context)
     
+#reviews
 def experience_detail(request, exp_id):
-    # Go to the database and get the experience where the ID matches the URL
     experience = get_object_or_404(Experience, id=exp_id)
+    reviews = experience.reviews.all().order_by('-created_at')
     
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect('login')
+
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.experience = experience
+            new_review.user = request.user
+            new_review.save()
+            
+            return redirect(f"{reverse('experience_detail', args=[experience.id])}#about")
+    else:
+        form = ReviewForm()
+        
     context = {
         'experience': experience,
+        'reviews': reviews,
+        'form': form,
     }
     return render(request, 'experiences/experience_detail.html', context)
+
+
+@require_POST
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+    exp_id = review.experience.id 
+    
+    review.delete()
+    return redirect(f"{reverse('experience_detail', args=[exp_id])}#about")

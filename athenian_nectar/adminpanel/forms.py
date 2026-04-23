@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
-        fields = ['title', 'category', 'subcategory', 'description', 'image', 'price', 'duration', 'rating', 'total_reviews'] 
+        fields = ['title', 'category', 'subcategory', 'description', 'image', 'price', 'duration'] 
         
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'maxlength': '40'}),
@@ -17,10 +17,7 @@ class ExperienceForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5'}),
             'duration': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.5'}),
-            'rating': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.1', 'value': '5.0'}),
-            'total_reviews': forms.NumberInput(attrs={'class': 'form-control', 'value': '0'}),
         }
-
 #category
 class CategoryForm(forms.ModelForm):
     class Meta:

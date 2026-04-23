@@ -44,7 +44,7 @@
         <div class="admin-table-card ">
             <h2 class="admin-title" id="form_title">Add Experience</h2>
 
-            <div id="#tasks_form_container">
+            <div id="tasks_form_container">
                 <form id="tasks_form" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
@@ -91,9 +91,7 @@
                             data-category="{% if exp.category.id %}{{ exp.category.id }}{% else %}{{ exp.category }}{% endif %}"
                             data-subcategory="{% if exp.subcategory.id %}{{ exp.subcategory.id }}{% else %}{{ exp.subcategory }}{% endif %}"
                             data-price="{{ exp.price}}"
-                            data-duration="{{ exp.duration }}"
-                            data-rating="{{ exp.rating }}"
-                            data-total_reviews="{{ exp.total_reviews }}">
+                            data-duration="{{ exp.duration }}">
                             
                             <td>
                                 {{ exp.title }}

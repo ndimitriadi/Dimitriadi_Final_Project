@@ -121,8 +121,8 @@
                     <div class="blog-content">
                         <div class="blog-rating">
                             <span class="blog-rating-star">★</span> 
-                            {{ item.rating }} 
-                            <span class="blog-rating-number">({{ item.total_reviews }})</span>
+                            {{ item.average_rating }}
+                            <span class="blog-rating-number">({{ item.reviews.count }})</span>
                         </div>
 
                         <h3 id="blog-title-{{ item.id }}">

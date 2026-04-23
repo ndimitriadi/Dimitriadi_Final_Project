@@ -82,14 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelector('#tasks_form [name="price"]').value = parseFloat(price || 0).toFixed(2);
             document.querySelector('#tasks_form [name="description"]').value = descriptionText;
             document.querySelector('#tasks_form [name="duration"]').value = row.getAttribute('data-duration') || "";
-            document.querySelector('#tasks_form [name="rating"]').value = row.getAttribute('data-rating') || "5.0";
-            document.querySelector('#tasks_form [name="total_reviews"]').value = row.getAttribute('data-total_reviews') || "0";
             
             if (image) image.removeAttribute('required');
             if (hidden_id) hidden_id.value = row.getAttribute('data-id');
             if (form_title) form_title.innerHTML = `Edit Experience`;
             if (save_button) save_button.innerText = "Update";
             
+            console.log("CLICK WORKS");
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
