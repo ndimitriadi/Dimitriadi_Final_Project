@@ -271,7 +271,6 @@ ul.errorlist li {
     }
 
     .favorites-grid {
-        /* Locks the cards at exactly 220px wide */
         grid-template-columns: repeat(auto-fill, 220px);
         justify-content: center;
     }

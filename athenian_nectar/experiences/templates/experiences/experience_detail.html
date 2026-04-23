@@ -65,9 +65,15 @@
                     <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" required class="booking-input">
                 </div>
 
-                <button type="submit" class="orange-button">
-                    Book Experience
-                </button>
+                {% if user.is_authenticated %}
+                    <button type="submit" class="orange-button">
+                        Book Experience
+                    </button>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="orange-button" id="locked-button">
+                        Log in to Book
+                    </a>
+                {% endif %}    
             </form>
             
         </div>

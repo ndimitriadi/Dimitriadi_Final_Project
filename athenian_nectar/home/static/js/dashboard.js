@@ -48,3 +48,32 @@ document.addEventListener('DOMContentLoaded', function() {
     show_more_button('#favorites-grid', '#favorites-show-more-button', 8);
     show_more_button('#ratings-grid', '#ratings-show-more-button', 8);
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+        const order_button = document.querySelector('#orders-toggle-button');
+        const extra_order = document.querySelectorAll('.extra-order');
+        
+        if (order_button && extra_order.length > 0) {
+            
+            extra_order.forEach(order => order.style.display = 'none');
+            order_button.innerHTML = 'Show More';
+            order_button.setAttribute('data-expanded', 'false');
+
+            order_button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const is_open = order_button.getAttribute('data-expanded') === 'true';
+
+                if (is_open) {
+                    //close
+                    extra_order.forEach(order => order.style.display = 'none');
+                    order_button.innerHTML = 'Show More';
+                    order_button.setAttribute('data-expanded', 'false'); 
+                } else {
+                    extra_order.forEach(order => order.style.display = 'block');
+                    order_button.innerHTML = 'Show Less';
+                    order_button.setAttribute('data-expanded', 'true'); 
+                }
+            });
+        }
+    });
