@@ -5,6 +5,7 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/experiences.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <link rel="stylesheet" href="{% static 'css/discover.css' %}">
 {% endblock %}
 
@@ -51,7 +52,23 @@
                 <span class="detail-subcategory">{{ experience.subcategory.name }}</span>
             </div>
 
-            <button class="orange-button">Add to Cart</button>
+            <form method="POST" action="{% url 'add_to_cart' experience.id %}" class="booking-form">
+                {% csrf_token %}
+                
+                <div class="booking-field" onclick="this.querySelector('input').showPicker()">
+                    <label for="booking_date" class="booking-label">Select Date:</label>
+                    <input type="date" id="booking_date" name="booking_date" min="{% now 'Y-m-d' %}" required class="booking-input">
+                </div>
+
+                <div class="booking-field">
+                    <label for="quantity" class="booking-label">Number of People:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" required class="booking-input">
+                </div>
+
+                <button type="submit" class="orange-button">
+                    Book Experience
+                </button>
+            </form>
             
         </div>
     </div>

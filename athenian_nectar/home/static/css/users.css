@@ -185,39 +185,6 @@ ul.errorlist li {
     margin: 25px 0;
 }
 
-[data-theme="dark"] .login-container,
-[data-theme="dark"] .dashboard-card {
-    background-color: #1e1e1e; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5); 
-}
-
-[data-theme="dark"] .login-container p label,
-[data-theme="dark"] .profile-form p label {
-    color: #ccc;
-}
-
-[data-theme="dark"] .dashboard-card h2,
-[data-theme="dark"] .dashboard-title {
-    color: #ffffff;
-}
-
-[data-theme="dark"] .login-container input,
-[data-theme="dark"] .profile-form input {
-    background-color: #2a2a2a;
-    border-color: #444;
-    color: #fff;
-}
-
-[data-theme="dark"] .login-container input:focus,
-[data-theme="dark"] .profile-form input:focus {
-    border-color: #e37e1c;
-    outline: none;
-}
-
-[data-theme="dark"] hr {
-    border-color: #333;
-}
-
 /*SUCCESS MESSAGES*/
 
 .messages-container {
@@ -239,20 +206,11 @@ ul.errorlist li {
     border: none;
 }
 
-[data-theme="dark"] .message-success {
-    background-color: #143524;
-    border: none;
-}
-
 .message-error {
     background-color: #f8d7da;
     border: none;
 }
 
-[data-theme="dark"] .message-error {
-    background-color: #521217;
-    border-color:none;
-}
 
 /* FAVORITE MINI CARDS*/
 
@@ -307,11 +265,6 @@ ul.errorlist li {
     font-weight: bold;
 }
 
-[data-theme="dark"] .favorite-mini-card {
-    background: #2a2a2a;
-    border: none;
-}
-
 @media (max-width: 900px) {
     .dashboard-grid {
         grid-template-columns: 1fr; 
@@ -353,13 +306,3 @@ ul.errorlist li {
     color: white;
     transform: translateY(-2px);
 }
-
-[data-theme="dark"] .show-more-button {
-    background-color: #2a2a2a;
-    color: #fff;
-    border: none;
-}
-[data-theme="dark"] .show-more-button:hover {
-    background-color: #e37e1c;
-}
-

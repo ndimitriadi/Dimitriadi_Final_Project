@@ -96,3 +96,37 @@ def checkout(request):
         return redirect('dashboard')
         
     return redirect('cart_detail')
+
+# Add these to the bottom of orders/views.py
+
+def update_cart(request, exp_id):
+    if request.method == 'POST':
+        # Grab the new quantity from the form, default to 1 if something goes wrong
+        quantity = int(request.POST.get('quantity', 1))
+        cart = request.session.get('cart', {})
+        exp_id_str = str(exp_id)
+
+        if exp_id_str in cart:
+            if quantity > 0:
+                cart[exp_id_str]['quantity'] = quantity
+                messages.success(request, "Cart updated!")
+            else:
+                # If they set quantity to 0, just remove it entirely
+                del cart[exp_id_str]
+                messages.success(request, "Item removed from cart.")
+
+        # Save the updated dictionary back to the session
+        request.session['cart'] = cart
+        
+    return redirect('cart_detail')
+
+def remove_from_cart(request, exp_id):
+    cart = request.session.get('cart', {})
+    exp_id_str = str(exp_id)
+
+    if exp_id_str in cart:
+        del cart[exp_id_str]
+        request.session['cart'] = cart
+        messages.success(request, "Item removed from cart.")
+
+    return redirect('cart_detail')

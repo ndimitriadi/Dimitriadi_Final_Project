@@ -215,24 +215,6 @@
     }
 }
 
-[data-theme="dark"] .blog-card,
-[data-theme="dark"] .weather-card {
-    background-color: #1e1e1e; 
-    border: none;
-}
-
-[data-theme="dark"] .blog-content h3 a,
-[data-theme="dark"] .price {
-    color: #ffffff;
-}
-
-[data-theme="dark"] .blog-description,
-[data-theme="dark"] .blog-rating,
-[data-theme="dark"] .blog-details {
-    color: #cccccc;
-}
-
-
 /* ------------- SAVE BUTTON--------------*/
 .save-button {
     position: absolute;
@@ -255,11 +237,6 @@
 .save-button:hover {
     transform: scale(1.15);
 }
-
-[data-theme="dark"] .save-button {
-    background: var(--bg-color);
-}
-
 
 /* -------------------------------SEARCH BAR------------------------------- */
 .search-container {
@@ -317,15 +294,6 @@
     color: var(--text-muted); 
     font-style: italic; 
     margin: 0;
-}
-
-[data-theme="dark"] #blog-search {
-    background-color: #1e1e1e;
-    border-color: #333333;
-}
-
-[data-theme="dark"] #blog-search:focus {
-    border-color: #e37e1c;
 }
 
 /* -------------------------------FILTERING ------------------------------- */
@@ -386,23 +354,4 @@
 .filter-control:focus {
     outline: none;
     border-color: #e37e1c;
-}
-
-[data-theme="dark"] .filter-label {
-    color: #cccccc;
-}
-
-[data-theme="dark"] .filter-control {
-    background-color: #1e1e1e;
-    border-color: #333333;
-    color: #ffffff;
-}
-
-[data-theme="dark"] .filter-control:focus {
-    border-color: #e37e1c;
-}
-
-[data-theme="dark"] .filter-container {
-    background-color: #1e1e1e;
-    border: none;
 }

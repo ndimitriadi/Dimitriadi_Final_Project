@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from experiences.models import Experience, Review
+from orders.models import Order
 from .models import Profile
 
 # Create your views here.
@@ -62,6 +63,8 @@ def dashboard(request):
         exp_dict = {exp.id: exp for exp in exps}
         recently_viewed_exps = [exp_dict[i] for i in recently_viewed_ids if i in exp_dict]
 
+    purchases = Order.objects.filter(user=request.user).order_by('-created_at')
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -71,6 +74,7 @@ def dashboard(request):
         'favorites': profile.favorites.all(),
         'user_reviews': user_reviews,
         'recently_viewed': recently_viewed_exps,
+        'purchases': purchases,
     }
     
     return render(request, 'users/dashboard.html', context)

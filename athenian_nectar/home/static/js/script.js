@@ -32,56 +32,6 @@ function hamburger_menu(){
         }
         })
 }
-            
-
-/*-------------- DARK MODE -------------------------------------*/
-
-class dark_mode extends HTMLElement {
-  connectedCallback() { //executes as soon as <dark-mode-toggle> is on the page
-
-    this.innerHTML = `
-      <button id="theme-toggle" aria-label="Toggle dark mode">
-        <i id="theme-icon" class="bi bi-moon-fill" aria-hidden="true"></i>
-      </button>
-    `;
-
-    //storing elements
-    this.theme_toggle = this.querySelector("#theme-toggle");
-    this.icon = this.querySelector("#theme-icon");
-    this.htmlElement = document.documentElement;
-
-    //checks if we have previously selected a theme
-    const saved_theme = localStorage.getItem("theme") || "light";
-    this.htmlElement.setAttribute("data-theme", saved_theme);
-    this.update_icon(saved_theme);
-
-    this.theme_toggle.addEventListener("click", () => {
-        const current_theme = this.htmlElement.getAttribute("data-theme");
-        let new_theme;
-
-        if (current_theme === "dark") {
-            new_theme = "light";
-        } else {
-            new_theme = "dark";
-        }
-
-        this.htmlElement.setAttribute("data-theme", new_theme);
-        localStorage.setItem("theme", new_theme);
-        this.update_icon(new_theme);
-    });
-  }
-
-    update_icon(theme) {
-        if (theme === "dark") {
-            this.icon.className="bi bi-moon-fill";
-        } else {
-            this.icon.className="bi bi-sun-fill";
-        }
-    }
-}
-
-customElements.define('dark-mode-toggle', dark_mode);
-
 
 /*--------------- BACK TO TOP BUTTON-----------------------------*/
 document.addEventListener('DOMContentLoaded', () => {

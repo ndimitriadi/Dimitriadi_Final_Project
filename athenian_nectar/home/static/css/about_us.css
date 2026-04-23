@@ -40,10 +40,6 @@
     box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 
-[data-theme="dark"] .team-member {
-    background-color: #1e1e1e;
-    border: none;
-}
 .team-avatar{
     width: 220px;
     height: 220px;

@@ -9,10 +9,6 @@ a.contact-email {
     text-decoration: none;
 }
 
-[data-theme="dark"] a.contact-email {
-    color: var(--text-muted);
-}
-
 a.contact-email:hover{
     text-decoration: underline;
 }
@@ -24,14 +20,6 @@ a.contact-email:hover{
 .social-media-row-contact a{
     text-decoration: none;
     display: inline-block;  
-}
-
-[data-theme="dark"] .social-media-row-contact img {
-    filter: brightness(0) invert(86%);
-}
-
-[data-theme="dark"] .social-media-row-contact a:hover img {
-    filter: invert(54%) sepia(86%) saturate(421%) hue-rotate(350deg) brightness(95%) contrast(95%);
 }
 
 .social-media-row-contact a:hover img {
@@ -71,10 +59,6 @@ a.contact-email:hover{
     border-radius:20px;
     box-shadow:0 10px 25px rgba(0,0,0,0.1);
     text-align: left;
-}
-
-[data-theme="dark"] .form-card {
-    background-color: #1e1e1e;
 }
 
 .subtitle{

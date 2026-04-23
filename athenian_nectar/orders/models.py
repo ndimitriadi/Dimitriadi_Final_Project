@@ -22,4 +22,4 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f"{self.quantity}x {self.experience.title} (Order #{self.order.id})""
+        return f"{self.quantity}x {self.experience.title} (Order #{self.order.id})"

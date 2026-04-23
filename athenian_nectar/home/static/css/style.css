@@ -7,15 +7,6 @@
   --line-color: #000000;        /* line */
 }
 
-/* dark mode colors */
-[data-theme="dark"] {
-    --bg-color: #000000;          
-    --text-color: #f0f0f0;     
-    --text-muted: #dbdbdbfb;     
-    --border-color: #ffffff;   
-    --line-color: #444444;           
-}
-
 .cardDM {
     background-color: var(--cardDM-bg);
     padding: 1rem;
@@ -49,10 +40,6 @@
 
 #theme-toggle:hover {
     transform: translateY(-5px);
-}
-
-[data-theme="dark"] #theme-toggle {
-    background-color: #1e1e1e;
 }
 
 body {
@@ -169,13 +156,6 @@ a:hover{
     background-color: #eeeeee;      
 }
 
-[data-theme="dark"] .cancel-btn,
-[data-theme="dark"] .confirm_cancel_button {
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: #ffffff;
-}
-
-
 /* ----------BACK TO TOP BUTTON------------*/
 #back-to-top {
     position: fixed;
@@ -209,21 +189,13 @@ a:hover{
     transform: translateY(-5px); 
 }
 
-[data-theme="dark"] #back-to-top {
-   background-color: #1e1e1e;
-}
-
 /* ---------------  HEADER ------------------------------------------------------------- */
-
-#header-placeholder {
-    position: sticky;
-    top: 20px;
-    z-index: 1000;
-    width: 100%;
-}
 
 .athenian-header {
     padding: 0 20px;
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
 }
 
 .header-container {
@@ -238,10 +210,6 @@ a:hover{
     box-shadow: 0 8px 30px rgba(0,0,0,0.2);
 }
 
-[data-theme="dark"] .header-container {
-   background-color: #1e1e1e;
-}
- 
 .logo-section img {
     height: 40px; 
     width: auto;  
@@ -364,14 +332,6 @@ a:hover{
     padding: 10px 20px; 
 }
 
-[data-theme="dark"] .logout-button {
-    color: #ffffff;
-}
-
-[data-theme="dark"] .logout-button:hover {
-    color: #e37e1c;
-}
-
 @media (max-width: 1000px) {
     .nav-links { display: none; }
     .hamburger-button { display: flex; }
@@ -431,10 +391,6 @@ a:hover{
     font-size: 90%;
 }
 
-[data-theme="dark"] .footer-email {
-    color: var(--text-muted);
-}
-
 .footer-social {
     display: flex;
     gap: 10px;
@@ -448,14 +404,6 @@ a:hover{
 .footer-social a{
     text-decoration: none;
     display: inline-block;  
-}
-
-[data-theme="dark"] .footer-social img {
-    filter: brightness(0) invert(86%);
-}
-
-[data-theme="dark"] .footer-social a:hover img {
-    filter: invert(54%) sepia(86%) saturate(421%) hue-rotate(350deg) brightness(95%) contrast(95%);
 }
 
 .footer-social a:hover img {
@@ -488,11 +436,6 @@ a:hover{
     width: 100%;
 }
 
-[data-theme="dark"] .newsletter {
-    background-color: #1e1e1e;
-    border-color: #333333;
-}
-
 .newsletter form {
     display: flex;
     flex-direction: column;
@@ -514,12 +457,6 @@ a:hover{
 
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-[data-theme="dark"] .form-area {
-    background-color: #1e1e1e;
-    border-color: #333333;
-    color:var(--text-color)
 }
 
 .newsletter-button{

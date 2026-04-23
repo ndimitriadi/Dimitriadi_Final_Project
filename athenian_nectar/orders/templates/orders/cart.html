@@ -1,0 +1,96 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <link rel="stylesheet" href="{% static 'css/experiences.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="description-container" >
+    
+    <h1 class="cart-title">Your Cart</h1>
+
+    {% if cart_items %}
+        <div class="review-box" id="cart-box">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Experience</th>
+                        <th>Price</th>
+                        <th>People</th>
+                        <th>Subtotal</th>
+                        <th></th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr>
+                            
+                            <td>
+                                <div class="cart-item-info">
+                                    <img src="{{ item.experience.image.url }}" alt="{{ item.experience.title }}">
+                                    <strong>{{ item.experience.title }}</strong>
+                                </div>
+                            </td>
+                            
+                            <td >€{{ item.experience.price }}</td>
+                            
+                            <td>
+                                <form method="POST" action="{% url 'update_cart' item.experience.id %}" class="quantity-form">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="10">
+                                    <button type="submit" class="update-button" title="Update Quantity">
+                                        <i class="bi bi-arrow-clockwise"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            
+                            <td class="subtotal">€{{ item.total_price }}</td>
+                            
+                            <td class="remove-item">
+                                <a href="{% url 'remove_from_cart' item.experience.id %}" class="remove-button">
+                                    <i class="bi bi-trash3"></i>
+                                </a>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="cart-bottom">
+                <div>
+                    <h2>Total: <span>€{{ cart_total }}</span></h2>
+                </div>
+                
+                <form method="POST" action="{% url 'checkout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="orange-button">
+                        Checkout 
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="continue-shopping">
+            <a href="{% url 'discover' %}">
+                <i class="bi bi-arrow-left"></i> Continue Shopping
+            </a>
+        </div>
+
+    {% else %}
+        <div class="empty-cart">
+            <i class="bi bi-cart-x" ></i>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added any experiences yet.</p>
+            <a href="{% url 'discover' %}">
+                <button class="orange-button">Discover Experiences</button>
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -51,11 +51,6 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-[data-theme="dark"] .recent-task-card{
-    background-color: #1e1e1e;
-    border: none;
-}
-
 .recent-task-card p {
     margin: 5px 0;
     font-size: 14px;
@@ -79,16 +74,6 @@
 .status-Pending { 
     background: #fef5e7; 
     color: #f39c12; 
-}
-
-[data-theme="dark"] .status-Visited {
-    background-color: transparent;
-    border: 1px solid #2ecc71;
-}
-
-[data-theme="dark"] .status-Pending {
-    background-color: transparent;
-    border: 1px solid #f39c12;
 }
 
 recent_tasks_grid p{
@@ -120,11 +105,6 @@ span{
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);  
-}
-
-[data-theme="dark"] .chart-card {
-    background-color: #1e1e1e;
-    border: none;
 }
 
 .dashboard{
@@ -241,11 +221,6 @@ span{
             grid-template-rows: auto 1fr auto;
         }
 
-        [data-theme="dark"] .card {
-            background-color: #1e1e1e;
-            border: none;
-        }
-
         /* Arrows */
         .carousel-btn {
             position:absolute;
@@ -260,12 +235,6 @@ span{
             padding: 8px 14px;
             border-radius: 50%;
             z-index: 10;
-        }
-
-        [data-theme="dark"] .carousel-btn {
-            background-color: #444343;
-            border-color: #333333;
-            color: #ccc;
         }
 
         .prev { left: 10px; }
