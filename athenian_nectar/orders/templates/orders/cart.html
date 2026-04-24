@@ -53,15 +53,15 @@
                                         {% csrf_token %}
 
                                         <div class="cart-date" onclick="this.querySelector('input').showPicker()">
-                                            <i class="bi bi-calendar-event" ></i>
-                                            <input type="date" name="booking_date" value="{{ item.date }}" min="{% now 'Y-m-d' %}" required>
+                                            <i class="bi bi-calendar-event" aria-hidden="true"></i>
+                                            <input type="date" name="booking_date" value="{{ item.date }}" min="{% now 'Y-m-d' %}" required aria-label="Booking date for {{ item.experience.title }}">
                                         </div>
                                         
                                         
-                                        <i class="bi bi-person" ></i>
-                                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="10">
-                                        <button type="submit" class="update-button" title="Update Quantity">
-                                            <i class="bi bi-arrow-clockwise"></i>
+                                        <i class="bi bi-person" aria-hidden="true"></i>
+                                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="10" aria-label="Number of people for {{ item.experience.title }}">
+                                        <button type="submit" class="update-button" title="Update Quantity" aria-label="Update nuber of people for {{ item.experience.title }}">
+                                            <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -69,8 +69,8 @@
                                 <td class="subtotal">€{{ item.total_price }}</td>
                                 
                                 <td class="remove-item">
-                                    <a href="{% url 'remove_from_cart' item.item_key %}" class="remove-button">
-                                        <i class="bi bi-trash3"></i>
+                                    <a href="{% url 'remove_from_cart' item.item_key %}" class="remove-button" aria-label="Remove {{ item.experience.title }} from cart">
+                                        <i class="bi bi-trash3" aria-hidden="true"></i>
                                     </a>
                                 </td>
                                 
@@ -86,13 +86,13 @@
             
             <div class="continue-shopping">
                 <a href="{% url 'discover' %}">
-                    <i class="bi bi-arrow-left"></i> Continue Shopping
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i> Continue Shopping
                 </a>
             </div>
 
         {% else %}
             <div class="empty-cart">
-                <i class="bi bi-cart-x" ></i>
+                <i class="bi bi-cart-x" aria-hidden="true"></i>
                 <h3>Your cart is empty</h3>
                 <p>Looks like you haven't added any experiences yet.</p>
                 <a href="{% url 'discover' %}">
@@ -110,7 +110,7 @@
             <form id="payment-form" action="{% url 'checkout' %}" method="POST">
                 {% csrf_token %}
 
-                <div id="payment-error"></div>
+                <div id="payment-error" role="alert" aria-live="assertive"></div>
                 
                     <div class="form-group">
                         <label class="form-label">Cardholder Name</label>
@@ -121,7 +121,7 @@
                         <label class="form-label">Card Number</label>
                         <div class="input-icon-wrapper">
                             <input type="text" id="card-number" name="card_number" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" required>
-                            <i class="bi bi-credit-card-2-front input-icon"></i>
+                            <i class="bi bi-credit-card-2-front input-icon" aria-hidden="true"></i>
                         </div>
                     </div>
 
@@ -136,7 +136,7 @@
                         </div>
                     </div>
 
-                    <hr class="divider">
+                    <hr class="divider" aria-hidden="true">
 
                     <div class="total-row">
                         <strong>Total Amount:</strong>
@@ -144,7 +144,7 @@
                     </div>
 
                     <button type="submit" class="orange-button">
-                        <i class="bi bi-lock-fill"></i> Securely Pay & Book
+                        <i class="bi bi-lock-fill" aria-hidden="true"></i> Securely Pay & Book
                     </button>
                 </div>
             </form>

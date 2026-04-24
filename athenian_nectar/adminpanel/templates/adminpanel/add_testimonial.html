@@ -15,7 +15,7 @@
 {% block content %}
 <div class="add-container">
     
-    <div class="sidebar">   
+    <div class="sidebar" aria-label="Admin Navigation">   
         <div class="admin-side-title">
             <a href="{% url 'admin_panel' %}">Admin Panel</a>
         </div> 
@@ -60,7 +60,7 @@
                             <div class="form-input">
                                 {{ field }}
                                 {% if field.errors %}
-                                    <div class="errors">{{ field.errors }}</div>
+                                    <div class="errors" role="alert" aria-live="assertive">{{ field.errors }}</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -76,13 +76,13 @@
         </div>
 
         <div class="admin-table-card">
-            <div class="admin-table-container">
+            <div class="admin-table-container" aria-label="Testimonials List">
                 <table class="admin-table" id="testimonial_table">
                     <thead>
                         <tr>
-                            <th><i class="bi bi-person-fill"></i> Name</th>
-                            <th><i class="bi bi-star-fill"></i> Rating</th>
-                            <th><i class="bi bi-grid"></i> Actions</th>
+                            <th><i class="bi bi-person-fill" aria-hidden="true"></i> Name</th>
+                            <th><i class="bi bi-star-fill" aria-hidden="true"></i> Rating</th>
+                            <th><i class="bi bi-grid" aria-hidden="true"></i> Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,11 +105,11 @@
                             
                             <td>
                                 <div class="actions">
-                                    <button type="button" class="action-btn edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
+                                    <button type="button" class="action-btn edit-btn" aria-label="Edit testimonial from {{ t.name }}"><i class="bi bi-pencil-square" aria-hidden="true"></i> Edit</button>
                                     
                                     <form action="{% url 'delete_testimonial' t.id %}" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete the testimonial from {{ t.name|escapejs }}? This cannot be undone.');">
                                         {% csrf_token %}
-                                        <button type="submit" class="action-btn delete-btn"><i class="bi bi-trash3"></i> Delete</button>
+                                        <button type="submit" class="action-btn delete-btn" aria-label="Delete testimonial from {{ t.name }}"><i class="bi bi-trash3" aria-hidden="true"></i> Delete</button>
                                     </form>
                                 </div>
                             </td>

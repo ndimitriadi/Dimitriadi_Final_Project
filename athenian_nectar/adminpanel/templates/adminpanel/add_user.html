@@ -15,7 +15,7 @@
 {% block content %}
 <div class="add-container">
     
-    <div class="sidebar">   
+    <div class="sidebar" aria-label="Admin Navigation">   
         <div class="admin-side-title">
             <a href="{% url 'admin_panel' %}">Admin Panel</a>
         </div> 
@@ -60,7 +60,7 @@
                             <div class="form-input">
                                 {{ field }}
                                 {% if field.errors %}
-                                    <div class="errors text-danger">{{ field.errors }}</div>
+                                    <div class="errors" role="alert" aria-live="assertive">{{ field.errors }}</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -76,16 +76,16 @@
         </div>
 
         <div class="admin-table-card">
-            <div class="admin-table-container">
+            <div class="admin-table-container" aria-label="Registered Users List">
                 <table class="admin-table" id="user_table">
                     <thead>
                         <tr>
-                            <th><i class="bi bi-person"></i> Username</th>
-                            <th><i class="bi bi-envelope"></i> Email</th>
-                            <th><i class="bi bi-shield-lock"></i> Status</th>
-                            <th><i class="bi bi-clock-history"></i> Last Login</th>
-                            <th><i class="bi bi-calendar-check"></i> Joined</th>
-                            <th class="text-center"><i class="bi bi-grid"></i> Actions</th>
+                            <th><i class="bi bi-person" aria-hidden="true"></i> Username</th>
+                            <th><i class="bi bi-envelope" aria-hidden="true"></i> Email</th>
+                            <th><i class="bi bi-shield-lock" aria-hidden="true"></i> Status</th>
+                            <th><i class="bi bi-clock-history" aria-hidden="true"></i> Last Login</th>
+                            <th><i class="bi bi-calendar-check" aria-hidden="true"></i> Joined</th>
+                            <th class="text-center"><i class="bi bi-grid" aria-hidden="true"></i> Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,11 +114,11 @@
                             
                             <td>
                                 <div class="actions">
-                                    <button type="button" class="action-btn edit-btn"><i class="bi bi-pencil-square"></i> Edit</button>
+                                    <button type="button" class="action-btn edit-btn" aria-label="Edit user {{ u.username }}"><i class="bi bi-pencil-square" aria-hidden="true"></i> Edit</button>
                                     
                                     <form action="{% url 'delete_user' u.id %}" method="POST" class="inline-form" onsubmit="return confirm('Are you sure you want to delete user {{ u.username|escapejs }}? This cannot be undone.');">
                                         {% csrf_token %}
-                                        <button type="submit" class="action-btn delete-btn"><i class="bi bi-trash3"></i> Delete</button>
+                                        <button type="submit" class="action-btn delete-btn" aria-label="Delete user {{ u.username }}"><i class="bi bi-trash3" aria-hidden="true"></i> Delete</button>
                                     </form>
                                 </div>
                             </td>

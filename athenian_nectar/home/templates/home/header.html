@@ -17,7 +17,7 @@
 
             {% if user.is_authenticated %}
                 <a href="{% url 'cart_detail' %}" class="nav-link">
-                    <i class="bi bi-cart2"></i>
+                    <i class="bi bi-cart2" aria-hidden="true"></i>
                     
                     {% if cart_item_count > 0 %}
                         <span class="nav-cart">
@@ -27,21 +27,21 @@
                 </a>
 
                 <a href="{% url 'dashboard' %}" class="username_overflow">
-                    <i class="bi bi-person"></i> 
+                    <i class="bi bi-person" aria-hidden="true"></i> 
                     <span>{{ user.username|title }}</span>
                 </a>
                 
                 <form action="{% url 'logout' %}" method="post" class="logout-form">
                     {% csrf_token %}
                     <button type="submit" class="logout-button">
-                        <i class="bi bi-box-arrow-right"></i>
+                        <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
                         <span>Logout</span>
                     </button>
                 </form>
 
             {% else %}
                 <a href="{% url 'login' %}">
-                    <i class="bi bi-person"></i>
+                    <i class="bi bi-person" aria-hidden="true"></i>
                     <span>Login/Register</span>
                 </a>
             {% endif %}
@@ -74,21 +74,21 @@
         </a> 
 
         <a href="{% url 'dashboard' %}">
-            <i class="bi bi-person"></i> 
+            <i class="bi bi-person" aria-hidden="true"></i> 
             <span>{{ user.username|title}}</span>
         </a>
         
         <form action="{% url 'logout' %}" method="post" class="logout-form">
             {% csrf_token %}
             <button type="submit" class="logout-button">
-                <i class="bi bi-box-arrow-right"></i>
+                <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
                 <span>Logout</span>
             </button>
         </form>
 
     {% else %}
         <a href="{% url 'login' %}">
-            <i class="bi bi-person"></i>
+            <i class="bi bi-person" aria-hidden="true"></i>
             <span>Login/Register</span>
         </a>
     {% endif %}

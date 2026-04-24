@@ -19,25 +19,25 @@
         <h1 class="dashboard-title">{{ user.username|title }}'s Dashboard</h1>
         {% if request.user.is_superuser %}
             <a href="{% url 'admin_panel' %}" class="admin-panel-button">
-                <i class="bi bi-gear-fill"></i> Admin Panel
+                <i class="bi bi-gear-fill" aria-hidden="true"></i> Admin Panel
             </a>
         {% elif request.user.is_staff %}
             <a href="{% url 'admin_panel' %}" class="admin-panel-button">
-                <i class="bi bi-gear-fill"></i> Control Panel
+                <i class="bi bi-gear-fill" aria-hidden="true"></i> Control Panel
             </a>
         {% endif %}
     </div>
     
 
     {% if messages %}
-        <div class="messages-container">
+        <div class="messages-container" role="status" aria-live="polite">
             {% for message in messages %}
                 <div class="message message-{{ message.tags }}">
                     {% if message.tags == 'success' %}
-                        <i class="bi bi-check-circle-fill"></i>
+                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 
                     {% elif message.tags == 'error' %}
-                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
                     {% endif %}
                     
                     {{ message }}
@@ -57,7 +57,7 @@
                 <button type="submit" name="update_profile" class="login-button">Update Profile</button>
             </form>
 
-            <hr class="gray-line">
+            <hr class="gray-line" aria-hidden="true">
 
             <h3>Security</h3>
             
@@ -74,7 +74,7 @@
             <h2>Recent Activity</h2>
             
             <div class="activity-section">
-                <h3><i class="bi bi-eye-fill"></i> Previously Viewed</h3>
+                <h3><i class="bi bi-eye-fill" aria-hidden="true"></i> Previously Viewed</h3>
                 
                 {% if recently_viewed %}
                     <div class="favorites-grid" id="viewed-grid">
@@ -99,10 +99,10 @@
                 {% endif %}
             </div>
 
-            <hr class="gray-line">
+            <hr class="gray-line" aria-hidden="true">
 
              <div class="activity-section">
-                <h3><i class="bi bi-bookmark-fill"></i> My Favorites</h3>
+                <h3><i class="bi bi-bookmark-fill" aria-hidden="true"></i> My Favorites</h3>
                 {% if favorites %}
                     <div class="favorites-grid" id="favorites-grid">
                         {% for item in favorites %}
@@ -122,7 +122,7 @@
                     </div>
                     {% if favorites|length > 8 %}
                         <div class="show-more-container" id="favorites-show-more-container">
-                            <button id="favorites-show-more-button" class="show-more-button">
+                            <button id="favorites-show-more-button" class="show-more-button" aria-expanded="false" aria-controls="favorites-grid">
                                 Show More
                             </button>
                         </div>
@@ -132,10 +132,10 @@
                 {% endif %}
             </div>
             
-            <hr class="gray-line">
+            <hr class="gray-line" aria-hidden="true">
 
             <div class="activity-section">
-                <h3><i class="bi bi-star-fill"></i> My Reviews</h3>
+                <h3><i class="bi bi-star-fill" aria-hidden="true"></i> My Reviews</h3>
                 {% if user_reviews %}
                     <div class="favorites-grid" id="ratings-grid">
                         {% for review in user_reviews %}
@@ -150,9 +150,9 @@
                                         <div>
                                             {% for i in "12345"|make_list %}
                                                 {% if forloop.counter <= review.rating %}
-                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill" aria-hidden="true"></i>
                                                 {% else %}
-                                                    <i class="bi bi-star"></i>
+                                                    <i class="bi bi-star" aria-hidden="true"></i>
                                                 {% endif %}
                                             {% endfor %}
                                         </div>
@@ -164,7 +164,7 @@
                     </div>
                     {% if user_reviews|length > 8 %}
                         <div class="show-more-container" id="ratings-show-more-container">
-                            <button id="ratings-show-more-button" class="show-more-button">
+                            <button id="ratings-show-more-button" class="show-more-button" aria-expanded="false" aria-controls="ratings-grid">
                                 Show More
                             </button>
                         </div>
@@ -174,10 +174,10 @@
                 {% endif %}
             </div>
 
-            <hr class="gray-line">
+            <hr class="gray-line" aria-hidden="true">
 
             <div class="activity-section">
-                <h3><i class="bi bi-bag-check-fill"></i> Past Experiences</h3>
+                <h3><i class="bi bi-bag-check-fill" aria-hidden="true"></i> Past Experiences</h3>
                 {% if purchases %}
                     <div class="orders-grid">
             
@@ -220,8 +220,8 @@
                                                     </strong>
                                                     
                                                     <span class="order-item-meta">
-                                                        <i class="bi bi-calendar-check"></i> {{ item.booking_date|date:"l, F j, Y" }} &nbsp;|&nbsp; 
-                                                        <i class="bi bi-people"></i> {{ item.quantity }}
+                                                        <i class="bi bi-calendar-check" aria-hidden="true"></i> {{ item.booking_date|date:"l, F j, Y" }} &nbsp;|&nbsp; 
+                                                        <i class="bi bi-people" aria-hidden="true"></i> {{ item.quantity }}
                                                     </span>
                                                 </div>
                                                 
@@ -237,7 +237,7 @@
                         {% endfor %}
                         {% if purchases|length > 3 %}
                             <div class="show-more-container">
-                                <button id="orders-toggle-button" data-expanded="false" class="show-more-button">
+                                <button id="orders-toggle-button" data-expanded="false" class="show-more-button" aria-expanded="false" aria-controls="orders-grid">
                                     Show More
                                 </button>
                             </div>
