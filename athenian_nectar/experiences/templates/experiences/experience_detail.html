@@ -51,7 +51,9 @@
             
             <div class="more-details">
                 <span class="detail-price">€{{ experience.price }}</span>
-                <span class="detail-subcategory">{{ experience.subcategory.name }}</span>
+                {% if experience.subcategory %}
+                    <span class="detail-subcategory">{{ experience.subcategory.name }}</span>
+                {% endif %}
             </div>
 
             <form method="POST" action="{% url 'add_to_cart' experience.id %}" class="booking-form">

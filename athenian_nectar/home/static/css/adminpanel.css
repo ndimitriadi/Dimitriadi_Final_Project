@@ -247,6 +247,7 @@
 .admin-table th:nth-child(2) { width: 10%; } /* Actions */
 
 .admin-table th {
+    white-space: nowrap;
     text-align: left;
     padding: 15px;
     border-bottom: 2px solid var(--border-color);
