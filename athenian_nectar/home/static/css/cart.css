@@ -153,8 +153,7 @@
 
 .cart-bottom h2 {
     margin: 0;
-    color: #333;
-    font-size: 1.5rem;
+    font-size: 20px;
 }
 
 .cart-bottom span {
@@ -236,6 +235,167 @@
     background-color: #555;
     width: 97%;
 }
+
+* {
+    box-sizing: border-box; 
+}
+
+@media (max-width: 900px) {
+    .cart-layout {
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+        margin: 24px auto;
+    }
+ 
+    .checkout-wrapper {
+        margin-top: 0;
+    }
+ 
+    .cart-item-info img {
+        width: 100px;
+        height: 80px;
+    }
+    
+ 
+    .cart-title {
+        font-size: 28px;
+    }
+ 
+    .cart-table thead {
+        display: none;
+    }
+ 
+    .cart-table,
+    .cart-table tbody,
+    .cart-table tr,
+    .cart-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+ 
+    .cart-table tr {
+        padding: 16px 0;
+        border-bottom: 1px solid #eee;
+        position: relative;
+    }
+ 
+    .cart-table td:first-child {
+        padding: 0 52px 12px 16px;
+    }
+ 
+    .cart-item-info {
+        gap: 12px;
+        align-items: flex-start;
+    }
+ 
+    .cart-item-info img {
+        width: 80px;
+        height: 65px;
+        flex-shrink: 0;
+    }
+ 
+    .cart-item-link strong {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+ 
+    .cart-table td:nth-child(2) {
+        padding: 4px 16px;
+        font-size: 14px;
+        color: #555;
+    }
+ 
+    .cart-table td:nth-child(2)::before {
+        content: "Price per person: ";
+        font-weight: bold;
+    }
+ 
+    .cart-table td:nth-child(3) {
+        padding: 8px 16px;
+    }
+ 
+    .quantity-form {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+ 
+    .cart-date {
+        font-size: 13px;
+    }
+ 
+    .cart-date input {
+        width: 120px;
+    }
+ 
+    .cart-table td.subtotal {
+        padding: 6px 16px 8px;
+        font-size: 15px;
+    }
+ 
+    .cart-table td.subtotal::before {
+        content: "Subtotal: ";
+        font-weight: bold;
+    }
+ 
+    .cart-table td.remove-item {
+        position: absolute;
+        top: 16px;
+        right: 12px;
+        width: auto;
+        padding: 0;
+    }
+ 
+    .cart-bottom {
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+ 
+    .cart-bottom h2 {
+        font-size: 18px;
+    }
+ 
+    .payment-section {
+        padding: 18px;
+    }
+ 
+    .payment-title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+ 
+    .form-group {
+        margin-bottom: 14px;
+    }
+ 
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+    }
+ 
+    .payment-row {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 0;
+    }
+ 
+    .payment-column {
+        margin-bottom: 14px;
+    }
+ 
+    .total-row {
+        font-size: 17px;
+    }
+ 
+    .empty-cart {
+        width: auto;
+        box-sizing: border-box;
+        padding: 28px 16px;
+    }
+}
+
 
 /*PREVIOUS ORDERS IN DASHBOARD*/
 .orders-grid {
@@ -405,7 +565,7 @@
 .total-row {
     display: flex;
     justify-content: space-between;
-    font-size: 1.2rem;
+    font-size: 20px;
     margin-bottom: 20px;
 }
 

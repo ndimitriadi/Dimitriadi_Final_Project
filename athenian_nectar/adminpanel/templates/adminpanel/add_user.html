@@ -96,10 +96,10 @@
                                 data-email="{{ u.email }}"
                                 data-status="{% if u.is_superuser %}superuser{% elif u.is_staff %}staff{% else %}user{% endif %}">
                                 
-                            <td>{{ u.username }}</td>
-                            <td>{{ u.email }}</td>
+                            <td data-label="Username">{{ u.username }}</td>
+                            <td data-label="Email">{{ u.email }}</td>
                             
-                            <td>
+                            <td data-label="Status">
                                 {% if u.is_superuser %}
                                     <span class="is-superuser">Superuser</span>
                                 {% elif u.is_staff %}
@@ -109,8 +109,8 @@
                                 {% endif %}
                             </td>
                             
-                            <td class="user-dates">{{ u.last_login|date:"M d, Y"|default:"Never" }}</td>
-                            <td class="user-dates">{{ u.date_joined|date:"M d, Y" }}</td>
+                            <td data-label="Last Login" class="user-dates">{{ u.last_login|date:"M d, Y"|default:"Never" }}</td>
+                            <td data-label="Joined" class="user-dates">{{ u.date_joined|date:"M d, Y" }}</td>
                             
                             <td>
                                 <div class="actions">

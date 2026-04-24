@@ -256,6 +256,8 @@
     line-height: 1.6;
 }
 
+
+
 @media (max-width: 900px) {
     .reviews-layout-wrapper {
         flex-direction: column; 
