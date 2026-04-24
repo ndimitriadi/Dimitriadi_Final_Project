@@ -146,6 +146,9 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
 
 #security features
-#SECURE_SSL_REDIRECT = False #redirecting http to https
-#SECURE_CONTENT_TYPE_NOSNIFF = False #prevents browser from guessing content types
-#SECURE_BROWSER_XSS_FILTER = False #protection against cross-site scripting in older browsers
+SECURE_SSL_REDIRECT = True #redirecting http to https
+SECURE_CONTENT_TYPE_NOSNIFF = True #prevents browser from guessing content types
+SECURE_BROWSER_XSS_FILTER = True #protection against cross-site scripting in older browsers
+#sending cookies only through https
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True

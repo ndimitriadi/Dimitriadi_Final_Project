@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const paymentForm = document.querySelector('#payment-form');
     const errorBox = document.querySelector('#payment-error');
 
-    
+    //card name only letters and spaces allowed
+    cardName.addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+        cardName.style.borderColor = '#ddd'; 
+        errorBox.style.display = 'none';
+    });
 
     //card number
     cardNumber.addEventListener('input', function(e) {
