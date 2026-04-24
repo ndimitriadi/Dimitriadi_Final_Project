@@ -12,7 +12,7 @@ class Testimonial(models.Model):
 
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=100)
-    quote = models.TextField()
+    quote = models.TextField(max_length=200)
     stars = models.IntegerField(default=5, choices=star_options)
 
     def __str__(self):

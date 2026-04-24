@@ -10,10 +10,7 @@ from .forms import ExperienceForm, CategoryForm, SubcategoryForm, TestimonialFor
 def check_admin(user):
     return user.is_staff 
 
-def check_superadmin(user):
-    return user.is_superuser 
-
-@user_passes_test(check_superadmin, login_url='login') 
+@user_passes_test(check_admin, login_url='login') 
 def admin_panel(request):
     total_users = User.objects.count()
     all_experiences = Experience.objects.all()
@@ -201,7 +198,7 @@ def delete_testimonial(request, t_id):
     return redirect('add_testimonial')
 
 #users
-@user_passes_test(check_superadmin, login_url='login') 
+@user_passes_test(check_admin, login_url='login') 
 def add_user(request):
     edit_id = None 
     
@@ -233,7 +230,7 @@ def add_user(request):
     }
     return render(request, 'adminpanel/add_user.html', context)
 
-@user_passes_test(check_superadmin, login_url='login') 
+@user_passes_test(check_admin, login_url='login') 
 def delete_user(request, user_id):
     if request.method == 'POST':
         try:

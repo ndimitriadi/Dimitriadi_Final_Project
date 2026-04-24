@@ -6,7 +6,7 @@ from django.db.models import Avg
 # Create your models here.
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=30)
 
     # This makes the admin panel show "Categories" instead of "Categorys"
     class Meta:
@@ -17,7 +17,7 @@ class Category(models.Model):
 
 
 class Subcategory(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     class Meta:
@@ -27,7 +27,7 @@ class Subcategory(models.Model):
         return self.name
 
 class Experience(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.SET_NULL, blank=True, null=True)    
     description = models.TextField()

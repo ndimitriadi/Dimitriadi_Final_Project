@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //card expiration date
     cardExpiry.addEventListener('input', function(e) {
+
+        //month
         let value = e.target.value.replace(/\D/g, '');
 
         if (value.length >= 2) {
@@ -49,6 +51,26 @@ document.addEventListener('DOMContentLoaded', function() {
             value = value.substring(0, 2) + '/' + value.substring(2, 4);
         }
         e.target.value = value;
+
+        //year
+        if (value.length === 5) {
+        let [month, year] = value.split('/').map(Number);
+
+        year += 2000;
+
+        let now = new Date();
+        let currentMonth = now.getMonth() + 1;
+        let currentYear = now.getFullYear();
+
+        if (
+            year < currentYear ||
+            (year === currentYear && month < currentMonth)
+        ) {
+            e.target.setCustomValidity('Card expiry date is in the past');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    }
     });
 
     //cvv only numbers

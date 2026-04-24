@@ -41,8 +41,7 @@ def experience_detail(request, exp_id):
             return redirect('login')
 
         if has_reviewed:
-            messages.error(request, "You have already reviewed this experience.")
-            return redirect(f"{reverse('experience_detail', args=[experience.id])}#reviews-section")
+            return redirect(f"{reverse('experience_detail', args=[experience.id])}")
 
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -51,7 +50,7 @@ def experience_detail(request, exp_id):
             new_review.user = request.user
             new_review.save()
             
-            return redirect(f"{reverse('experience_detail', args=[experience.id])}#about")
+            return redirect(f"{reverse('experience_detail', args=[experience.id])}")
     else:
         form = ReviewForm()
 
@@ -95,4 +94,4 @@ def delete_review(request, review_id):
     exp_id = review.experience.id 
     
     review.delete()
-    return redirect(f"{reverse('experience_detail', args=[exp_id])}#about")
+    return redirect(f"{reverse('experience_detail', args=[exp_id])}")

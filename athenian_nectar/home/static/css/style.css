@@ -538,3 +538,8 @@ a:hover{
 
 
 /*--------------------------------------------------------------------------------------*/
+.username_overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

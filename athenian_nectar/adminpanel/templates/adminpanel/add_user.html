@@ -20,10 +20,12 @@
             <a href="{% url 'admin_panel' %}">Admin Panel</a>
         </div> 
 
+        {% if request.user.is_superuser %}
         <div>
             <div class="side-title">Authentication</div>
             <a href="{% url 'add_user' %}" class="side-link active">Users</a>
         </div>
+        {% endif %}
 
         <div>
             <div class="side-title">Experiences</div>
