@@ -1,0 +1,39 @@
+.error-container {
+    margin: 100px auto;
+    max-width: 600px;
+    padding: 50px 30px;
+    text-align: center;
+    background: var(--bg-color);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.error-title {
+    color: #e37e1c;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 50px;
+}
+
+.error-subtitle {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    margin-bottom: 30px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.error-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+/* Adds a border to the transparent cancel button so it looks like a secondary action */
+.error-browse-btn {
+    border: 1px solid #ddd;
+}

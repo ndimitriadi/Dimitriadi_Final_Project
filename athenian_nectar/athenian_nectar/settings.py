@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4b!h%fg29!14q^b#a_-_g!6rq3&t88w)+!d8pfsfi@ai5x*)b='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nikoletta.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -126,7 +126,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = []
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -139,3 +144,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 #where to redirect users after authentication
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
+
+#security features
+#SECURE_SSL_REDIRECT = False #redirecting http to https
+#SECURE_CONTENT_TYPE_NOSNIFF = False #prevents browser from guessing content types
+#SECURE_BROWSER_XSS_FILTER = False #protection against cross-site scripting in older browsers

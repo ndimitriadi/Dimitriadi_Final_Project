@@ -1,0 +1,29 @@
+{% extends 'home/base.html' %} {% load static %}
+
+{% block title %}404 Page Not Found {% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+    <link rel="stylesheet" href="{% static 'css/adminpanel.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+     
+    <h1 class="error-title">404</h1>
+    <h3 class="error-subtitle">Page Not Found</h3>
+    
+    <p class="error-message">
+        The experience or page you are looking for doesn't exist, has been moved, or is currently unavailable.
+    </p>
+    
+    <div class="error-actions">
+        <a href="{% url 'home' %}">
+            <button class="orange-button">Go Home</button>
+        </a>
+        <a href="{% url 'discover' %}">
+            <button class="cancel-btn">Browse Experiences</button>
+        </a>
+    </div>
+</div>
+{% endblock %}
